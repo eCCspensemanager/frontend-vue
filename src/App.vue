@@ -1,10 +1,13 @@
 <template>
   <v-app class="mx-auto">
     <v-app-bar app color="indigo" dark>
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="shouldShowDrawer = true"></v-app-bar-nav-icon>
       <v-toolbar-title>eCCspenseManager</v-toolbar-title>
     </v-app-bar>
-    <navigation v-bind:drawer="drawer" v-on:input="drawer = $event" />
+    <navigation
+      v-bind:shouldShowDrawer="shouldShowDrawer"
+      v-on:navigation-closed="shouldShowDrawer = $event"
+    />
     <v-main>
       <transaction-table />
     </v-main>
@@ -24,7 +27,7 @@ export default {
   },
 
   data: () => ({
-    drawer: false,
+    shouldShowDrawer: false,
   }),
 };
 </script>

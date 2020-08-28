@@ -3,33 +3,8 @@
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">New Item</v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="headline">{{ formTitle }}</span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.count" label="Count"></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="save">Save</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+        <v-btn color="primary" dark class="mb-2" @click="showDialog = true">New Item</v-btn>
+        <transaction-dialog :isVisible="showDialog" v-on:dialog-closed="showDialog = $event" />
       </v-toolbar>
     </template>
     <template v-slot:item.date="{ item }">{{ formatDate(item.date) }}</template>
@@ -40,10 +15,14 @@
 </template>
 
 <script>
+import TransactionDialog from "./transaction-dialog";
+
 export default {
   name: "TransactionTable",
+  components: {
+    TransactionDialog,
+  },
   data: () => ({
-    dialog: false,
     headers: [
       { text: "Payee", align: "start", value: "payee" },
       { text: "Memo", align: "start", value: "memo" },
@@ -51,29 +30,12 @@ export default {
       { text: "Category", align: "start", value: "category" },
       { text: "Amount", align: "end", value: "amount" },
     ],
-    data: false,
-    editedItem: {
-      name: "",
-      count: 0,
-    },
-    defaultItem: {
-      name: "",
-      count: 0,
-    },
+    showDialog: false,
   }),
-
-  watch: {
-    dialog(val) {
-      val || this.close();
-    },
-  },
 
   computed: {
     transactions: function () {
       return this.$store.state.transactions;
-    },
-    formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
     },
   },
 
@@ -88,24 +50,6 @@ export default {
 
     getAmount(amount) {
       return amount.toFixed(2).replace(".", ",") + "€";
-    },
-
-    close() {
-      this.dialog = false;
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      });
-    },
-
-    save() {
-      if (this.editedIndex > -1) {
-        // TODO edit
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
-      } else {
-        this.$store.commit("addTransaction", this.editedItem);
-      }
-      this.close();
     },
   },
 };

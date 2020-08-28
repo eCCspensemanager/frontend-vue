@@ -1,5 +1,6 @@
 export default class Transaction {
-    constructor(payee, memo, date, category, amount, outflow) {
+    constructor(id, payee, memo, date, category, amount, outflow) {
+        this.id = id
         this.payee = payee
         this.memo = memo
         this.date = date

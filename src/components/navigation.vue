@@ -1,5 +1,10 @@
 <template>
-  <v-navigation-drawer app temporary v-model="isVisible" v-on:input="$emit('input', isVisible)">
+  <v-navigation-drawer
+    app
+    temporary
+    v-model="showDrawer"
+    v-on:input="$emit('navigation-closed', showDrawer)"
+  >
     <v-list dense nav>
       <v-list-item v-for="item in items" :key="item.id" link :id="item.id">
         <v-list-item-icon>
@@ -18,10 +23,10 @@ import Vue from "vue";
 
 export default Vue.component("navigation", {
   props: {
-    drawer: Boolean,
+    shouldShowDrawer: Boolean,
   },
   data: () => ({
-    isVisible: false,
+    showDrawer: false,
     items: [
       { id: "btn-expenses", title: "Transactions", icon: "mdi-cash" },
       { id: "btn-settings", title: "Settings", icon: "mdi-cog" },
@@ -29,8 +34,8 @@ export default Vue.component("navigation", {
     ],
   }),
   watch: {
-    drawer: function (newVal) {
-      this.isVisible = newVal;
+    shouldShowDrawer: function (newVal) {
+      this.showDrawer = newVal;
     },
   },
 });
