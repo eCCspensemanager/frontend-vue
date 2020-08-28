@@ -32,6 +32,10 @@
         </v-dialog>
       </v-toolbar>
     </template>
+    <template v-slot:item.date="{ item }">{{ formatDate(item.date) }}</template>
+    <template v-slot:item.amount="{ item }">
+      <v-chip :color="getAmountColor(item.outflow)" dark>{{ getAmount(item.amount) }}</v-chip>
+    </template>
   </v-data-table>
 </template>
 
@@ -41,18 +45,11 @@ export default {
   data: () => ({
     dialog: false,
     headers: [
-      {
-        text: "Type",
-        align: "start",
-        sortable: false,
-        value: "name",
-      },
-      {
-        text: "Count",
-        align: "start",
-        sortable: false,
-        value: "count",
-      },
+      { text: "Payee", align: "start", value: "payee" },
+      { text: "Memo", align: "start", value: "memo" },
+      { text: "Date", align: "start", value: "date" },
+      { text: "Category", align: "start", value: "category" },
+      { text: "Amount", align: "end", value: "amount" },
     ],
     data: false,
     editedItem: {
@@ -81,6 +78,18 @@ export default {
   },
 
   methods: {
+    formatDate(date) {
+      return new Date(date).toLocaleDateString("de-DE");
+    },
+
+    getAmountColor(outflow) {
+      return outflow ? "red" : "green";
+    },
+
+    getAmount(amount) {
+      return amount.toFixed(2).replace(".", ",") + "€";
+    },
+
     close() {
       this.dialog = false;
       this.$nextTick(() => {
