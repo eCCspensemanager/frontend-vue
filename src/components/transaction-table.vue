@@ -5,7 +5,27 @@
 <script>
 export default {
   name: "TransactionTable",
-  props: ["headers", "transactions"],
+  data: () => ({
+    headers: [
+      {
+        text: "Type",
+        align: "start",
+        sortable: false,
+        value: "name",
+      },
+      {
+        text: "Count",
+        align: "start",
+        sortable: false,
+        value: "count",
+      },
+    ],
+  }),
+  computed: {
+    transactions: function () {
+      return this.$store.state.transactions;
+    },
+  },
 };
 </script>
 

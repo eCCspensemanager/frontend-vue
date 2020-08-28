@@ -6,7 +6,7 @@
     </v-app-bar>
     <navigation v-bind:drawer="drawer" v-on:input="drawer = $event" />
     <v-main>
-      <transaction-table :headers="headers" :transactions="consumables" />
+      <transaction-table />
     </v-main>
   </v-app>
 </template>
@@ -25,30 +25,6 @@ export default {
 
   data: () => ({
     drawer: false,
-    headers: [
-      {
-        text: "Type",
-        align: "start",
-        sortable: false,
-        value: "name",
-      },
-      {
-        text: "Count",
-        align: "start",
-        sortable: false,
-        value: "count",
-      },
-    ],
-    consumables: [
-      {
-        name: "Beer",
-        count: 20,
-      },
-      {
-        name: "Coke",
-        count: 2,
-      },
-    ],
   }),
 };
 </script>
