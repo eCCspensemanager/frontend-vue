@@ -1,15 +1,16 @@
-<template>
+// [vue/valid-v-slot]
+ <template>
   <v-data-table :headers="headers" :items="transactions">
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-spacer></v-spacer>
-        <v-btn color="primary" dark class="mb-2" @click="showDialog = true">New Item</v-btn>
+        <v-btn color="accent" dark class="mb-2" @click="showDialog = true">New Item</v-btn>
         <transaction-dialog :isVisible="showDialog" v-on:dialog-closed="showDialog = $event" />
       </v-toolbar>
     </template>
-    <template v-slot:item.date="{ item }">{{ formatDate(item.date) }}</template>
-    <template v-slot:item.amount="{ item }">
-      <v-chip :color="getAmountColor(item.outflow)" dark>{{ getAmount(item.amount) }}</v-chip>
+    <template v-slot:[`item.date`]="{ item }">{{ formatDate(item.date) }}</template>
+    <template v-slot:[`item.amount`]="{ item }">
+      <span :class="getAmountColor(item.outflow)">{{ getAmount(item.amount) }}</span>
     </template>
   </v-data-table>
 </template>
@@ -45,7 +46,7 @@ export default {
     },
 
     getAmountColor(outflow) {
-      return outflow ? "red" : "green";
+      return outflow ? "red--text" : "green--text"
     },
 
     getAmount(amount) {
