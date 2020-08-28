@@ -17,7 +17,7 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
-    add(state, transaction) { state.transactions.push(transaction) }
+    addTransaction(state, transaction) { state.transactions.push(transaction) }
   },
   actions: {
   },
