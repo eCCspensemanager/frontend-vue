@@ -19,7 +19,7 @@ describe('Navigation.vue', () => {
     })
 
     expect(wrapper.find("#btn-expenses").exists()).toBe(true);
-    expect(wrapper.find("#btn-user").exists()).toBe(true);
     expect(wrapper.find("#btn-settings").exists()).toBe(true);
+    expect(wrapper.find("#btn-about").exists()).toBe(true);
   })
 })
