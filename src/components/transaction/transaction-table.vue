@@ -4,7 +4,7 @@
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-spacer></v-spacer>
-        <v-btn color="accent" dark class="mb-2" @click="newTransaction()">New Item</v-btn>
+        <v-btn color="accent" dark class="mb-2" @click="newTransaction()">New Transaction</v-btn>
         <transaction-dialog :isVisible="showDialog" :item="dialogItem" v-on:dialog-closed="showDialog = $event" />
       </v-toolbar>
     </template>

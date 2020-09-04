@@ -1,29 +1,21 @@
 <template>
-  <v-dialog v-model="visible" max-width="500px">
+  <v-dialog persistent v-model="visible" max-width="500px">
     <v-card>
       <v-card-title>
         <span class="headline">{{ formTitle }}</span>
       </v-card-title>
       <v-card-text>
         <v-container>
-          <v-row>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="item.payee" label="Payee"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="item.category" label="Category"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="item.date" label="Date"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="item.payee" label="Payee" :rules="[rules.required]" ></v-text-field>
+              <v-text-field v-model="item.category" label="Category" :rules="[rules.required]"></v-text-field>
+              <v-text-field v-model="item.date" label="Date" type="date" :rules="[rules.required]"></v-text-field>
               <v-text-field v-model="item.memo" label="Memo"></v-text-field>
+            <v-row>
+            <v-col cols=9>
+              <v-text-field v-model.number="item.amount" label="Amount" type="number"  :rules="[rules.required]"></v-text-field>
             </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="item.amount" label="Amount"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-checkbox v-model="item.outflow" label="Outflow"></v-checkbox>
+            <v-col cols=3>
+              <v-checkbox v-model="item.outflow" label="Outflow" ></v-checkbox>
             </v-col>
           </v-row>
         </v-container>
@@ -31,13 +23,15 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text @click="close">Cancel</v-btn>
-        <v-btn color="accent" text @click="save">{{ submitBtn }}</v-btn>
+        <v-btn color="accent" :disabled="submitDisabled" text @click="save">{{ submitBtn }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+
+import {TRANSACTION_CREATE} from '../../store/mutation-types'
 
 export default {
   name: "TransactionDialog",
@@ -49,15 +43,21 @@ export default {
 
   data: () => ({
     visible: false,
+    rules: {
+      required: value => !!value || 'Required.',
+    }
   }),
 
   computed: {
     formTitle() {
-      return this.item.id == null ? "New Item" : "Edit Item";
+      return this.item.id == null ? "New Transaction" : "Edit Transaction";
     },
     submitBtn() {
       return this.item.id == null ? "Create" : "Update"
-    }
+    },
+    submitDisabled(){
+      return !this.item.isValid()
+    },
   },
 
   watch: {
@@ -74,8 +74,7 @@ export default {
 
     save() {
       if (this.item.id == null) {
-        // Object.assign(this.desserts[this.editedIndex], this.editedItem);
-        this.$store.commit("addTransaction", this.item);
+        this.$store.commit(TRANSACTION_CREATE, this.item);
       } else {
         this.$store.commit("editTransaction", this.item);
       }

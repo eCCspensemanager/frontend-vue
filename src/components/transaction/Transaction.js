@@ -8,8 +8,15 @@ export default class Transaction {
         this.amount = amount
         this.outflow = outflow
     }
+
+    isValid(){
+        return !!this.payee &&
+            !!this.category &&
+            !!this.amount &&
+            !!this.date
+    }
 }
 
 export function defaultTransaction() {
-    return new Transaction(null, "", "", null, "", 0, true)
+    return new Transaction(null, "", "", null, "", 1.23, true)
 } 
