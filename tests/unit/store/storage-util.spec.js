@@ -5,6 +5,6 @@ describe('storage-util.js', () => {
     let first = generateRandomNo();
     let second = generateRandomNo();
 
-    expect(first === second).toBeFalsy();
+    expect(first == second).toBeFalsy();
   });
 });
