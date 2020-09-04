@@ -10,15 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@master
-      - run: npm install
+      - run: npm ci
       - run: npm run build
       - run: npm run test:unit
-      
-     # - name: Build and Deploy
-     #   uses: grasilife/github-pages-deploy-action@master
-    #    env:
-   #       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-  #        BASE_BRANCH: master # The branch the action should deploy from.
- #         BRANCH: gh-pages # The branch the action should deploy to.
- #         FOLDER: build # The folder the action should deploy.
-#          BUILD_SCRIPT: npm install && npm run-script build # The build script the action should run prior to deploying.:  
