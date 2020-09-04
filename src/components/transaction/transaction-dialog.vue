@@ -31,21 +31,20 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text @click="close">Cancel</v-btn>
-        <v-btn color="accent" text @click="save">Save</v-btn>
+        <v-btn color="accent" text @click="save">{{ submitBtn }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
-import Transaction from "./Transaction";
 
 export default {
   name: "TransactionDialog",
 
   props: {
     isVisible: Boolean,
-    item: new Transaction("", "", null, "", "", 0, true),
+    item: Object,
   },
 
   data: () => ({
@@ -54,8 +53,11 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.item.id == null ? "New Item" : "Edit Item";
     },
+    submitBtn() {
+      return this.item.id == null ? "Create" : "Update"
+    }
   },
 
   watch: {
@@ -68,21 +70,14 @@ export default {
     close() {
       this.visible = false;
       this.$emit("dialog-closed", this.visible);
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      });
     },
 
     save() {
-      if (this.editedIndex > -1) {
-        // TODO edit
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+      if (this.item.id == null) {
+        // Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        this.$store.commit("addTransaction", this.item);
       } else {
-        this.$store.commit(
-          "addTransaction",
-          new Transaction("4", "es", "wird", new Date(), "any", 1337, false)
-        );
+        this.$store.commit("editTransaction", this.item);
       }
       this.close();
     },

@@ -9,3 +9,7 @@ export default class Transaction {
         this.outflow = outflow
     }
 }
+
+export function defaultTransaction() {
+    return new Transaction(null, "", "", null, "", 0, true)
+} 

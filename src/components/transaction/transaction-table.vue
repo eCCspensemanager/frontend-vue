@@ -5,7 +5,7 @@
       <v-toolbar flat color="white">
         <v-spacer></v-spacer>
         <v-btn color="accent" dark class="mb-2" @click="newTransaction()">New Item</v-btn>
-        <transaction-dialog :isVisible="showDialog" :item="editItem" v-on:dialog-closed="showDialog = $event" />
+        <transaction-dialog :isVisible="showDialog" :item="dialogItem" v-on:dialog-closed="showDialog = $event" />
       </v-toolbar>
     </template>
     <template v-slot:[`item.date`]="{ item }">{{ formatDate(item.date) }}</template>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Transaction from "./Transaction";
+import {defaultTransaction } from "./Transaction";
 import TransactionDialog from "./transaction-dialog";
 
 export default {
@@ -38,8 +38,7 @@ export default {
       { text: "Actions", align: "center", value: "actions", sortable: false },
     ],
     showDialog: false,
-    editItem: new Transaction("", "", "", null, "", 0, true),
-    defaultItem: new Transaction("", "", "", null, "", 0, true),
+    dialogItem: {},
   }),
 
   computed: {
@@ -62,16 +61,16 @@ export default {
     },
 
     newTransaction() {
-      this.editItem = Object.assign({}, this.defaultItem)
+      this.dialogItem = defaultTransaction()
       this.showDialog = true
     },
 
-    editTransaction(item){
-      this.editItem = Object.assign({}, item)
+    editTransaction(item) {
+      this.dialogItem = Object.assign({}, item)
       this.showDialog = true
     },
 
-    deleteTransaction(item){
+    deleteTransaction(item) {
       alert("delete \n" + item)
     },
   },
