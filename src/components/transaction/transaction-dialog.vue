@@ -1,21 +1,21 @@
 <template>
-  <v-dialog persistent v-model="visible" max-width="500px">
+  <v-dialog v-model="visible" persistent max-width="500px" @keydown.esc="close">
     <v-card>
       <v-card-title>
         <span class="headline">{{ formTitle }}</span>
       </v-card-title>
       <v-card-text>
         <v-container>
-              <v-text-field v-model="item.payee" label="Payee" :rules="[rules.required]" ></v-text-field>
-              <v-text-field v-model="item.category" label="Category" :rules="[rules.required]"></v-text-field>
-              <v-text-field v-model="item.date" label="Date" type="date" :rules="[rules.required]"></v-text-field>
-              <v-text-field v-model="item.memo" label="Memo"></v-text-field>
-            <v-row>
-            <v-col cols=9>
-              <v-text-field v-model.number="item.amount" label="Amount" type="number"  :rules="[rules.required]"></v-text-field>
+          <v-text-field v-model="item.payee" label="Payee" :rules="[rules.required]"></v-text-field>
+          <v-text-field v-model="item.category" label="Category" :rules="[rules.required]"></v-text-field>
+          <v-text-field v-model="item.date" label="Date" type="date" :rules="[rules.required]"></v-text-field>
+          <v-text-field v-model="item.memo" label="Memo"></v-text-field>
+          <v-row>
+            <v-col cols="9">
+              <v-text-field v-model.number="item.amount" label="Amount" type="number" :rules="[rules.required]"></v-text-field>
             </v-col>
-            <v-col cols=3>
-              <v-checkbox v-model="item.outflow" label="Outflow" ></v-checkbox>
+            <v-col cols="3">
+              <v-checkbox v-model="item.outflow" label="Outflow"></v-checkbox>
             </v-col>
           </v-row>
         </v-container>
@@ -30,11 +30,11 @@
 </template>
 
 <script>
-
-import {TRANSACTION_CREATE} from '../../store/mutation-types'
+import { TRANSACTION_CREATE } from '../../store/mutation-types';
+import Transaction from './transaction';
 
 export default {
-  name: "TransactionDialog",
+  name: 'TransactionDialog',
 
   props: {
     isVisible: Boolean,
@@ -44,19 +44,20 @@ export default {
   data: () => ({
     visible: false,
     rules: {
-      required: value => !!value || 'Required.',
-    }
+      required: (value) => !!value || 'Required.',
+    },
   }),
 
   computed: {
     formTitle() {
-      return this.item.id == null ? "New Transaction" : "Edit Transaction";
+      return this.item.id == null ? 'New Transaction' : 'Edit Transaction';
     },
     submitBtn() {
-      return this.item.id == null ? "Create" : "Update"
+      return this.item.id == null ? 'Create' : 'Update';
     },
-    submitDisabled(){
-      return !this.item.isValid()
+    submitDisabled() {
+      // TODO why is the instanceof workaround needed to prevent function unknown?
+      return this.item instanceof Transaction && !this.item.isValid();
     },
   },
 
@@ -69,14 +70,14 @@ export default {
   methods: {
     close() {
       this.visible = false;
-      this.$emit("dialog-closed", this.visible);
+      this.$emit('dialog-closed', this.visible);
     },
 
     save() {
       if (this.item.id == null) {
         this.$store.commit(TRANSACTION_CREATE, this.item);
       } else {
-        this.$store.commit("editTransaction", this.item);
+        this.$store.commit('editTransaction', this.item);
       }
       this.close();
     },
@@ -84,5 +85,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

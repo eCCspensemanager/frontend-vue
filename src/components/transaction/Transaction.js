@@ -10,9 +10,7 @@ export default class Transaction {
   }
 
   isValid() {
-    return (
-      !!this.payee && !!this.category && !!this.amount && !!this.date
-    );
+    return !!this.payee && !!this.category && !!this.amount && !!this.date;
   }
 }
 
