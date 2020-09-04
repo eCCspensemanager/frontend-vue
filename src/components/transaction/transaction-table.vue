@@ -4,18 +4,23 @@
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-spacer></v-spacer>
-        <v-btn color="accent" dark class="mb-2" @click="showDialog = true">New Item</v-btn>
-        <transaction-dialog :isVisible="showDialog" v-on:dialog-closed="showDialog = $event" />
+        <v-btn color="accent" dark class="mb-2" @click="newTransaction()">New Item</v-btn>
+        <transaction-dialog :isVisible="showDialog" :item="editItem" v-on:dialog-closed="showDialog = $event" />
       </v-toolbar>
     </template>
     <template v-slot:[`item.date`]="{ item }">{{ formatDate(item.date) }}</template>
     <template v-slot:[`item.amount`]="{ item }">
       <span :class="getAmountColor(item.outflow)">{{ getAmount(item.amount) }}</span>
     </template>
+    <template v-slot:[`item.actions`]="{ item }">
+      <v-icon small class="mr-2" @click="editTransaction(item)">mdi-pencil</v-icon>
+      <v-icon small @click="deleteTransaction(item)">mdi-delete</v-icon>
+    </template>
   </v-data-table>
 </template>
 
 <script>
+import Transaction from "./Transaction";
 import TransactionDialog from "./transaction-dialog";
 
 export default {
@@ -30,8 +35,11 @@ export default {
       { text: "Date", align: "start", value: "date" },
       { text: "Category", align: "start", value: "category" },
       { text: "Amount", align: "end", value: "amount" },
+      { text: "Actions", align: "center", value: "actions", sortable: false },
     ],
     showDialog: false,
+    editItem: new Transaction("", "", "", null, "", 0, true),
+    defaultItem: new Transaction("", "", "", null, "", 0, true),
   }),
 
   computed: {
@@ -51,6 +59,20 @@ export default {
 
     getAmount(amount) {
       return amount.toFixed(2).replace(".", ",") + "€";
+    },
+
+    newTransaction() {
+      this.editItem = Object.assign({}, this.defaultItem)
+      this.showDialog = true
+    },
+
+    editTransaction(item){
+      this.editItem = Object.assign({}, item)
+      this.showDialog = true
+    },
+
+    deleteTransaction(item){
+      alert("delete \n" + item)
     },
   },
 };

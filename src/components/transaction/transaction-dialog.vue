@@ -8,10 +8,22 @@
         <v-container>
           <v-row>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
+              <v-text-field v-model="item.payee" label="Payee"></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="editedItem.count" label="Count"></v-text-field>
+              <v-text-field v-model="item.category" label="Category"></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="item.date" label="Date"></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="item.memo" label="Memo"></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="item.amount" label="Amount"></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-checkbox v-model="item.outflow" label="Outflow"></v-checkbox>
             </v-col>
           </v-row>
         </v-container>
@@ -33,12 +45,11 @@ export default {
 
   props: {
     isVisible: Boolean,
+    item: new Transaction("", "", null, "", "", 0, true),
   },
 
   data: () => ({
     visible: false,
-    editedItem: new Transaction("", "", null, "", 0, true),
-    defaultItem: new Transaction("", "", null, "", 0, true),
   }),
 
   computed: {
