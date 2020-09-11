@@ -1,28 +1,20 @@
 <template>
-  <v-dialog v-model="visible" max-width="500px">
+  <v-dialog v-model="visible" persistent max-width="500px" @keydown.esc="close">
     <v-card>
       <v-card-title>
         <span class="headline">{{ formTitle }}</span>
       </v-card-title>
       <v-card-text>
         <v-container>
+          <v-text-field v-model="item.payee" label="Payee" :rules="[rules.required]"></v-text-field>
+          <v-text-field v-model="item.category" label="Category" :rules="[rules.required]"></v-text-field>
+          <v-text-field v-model="item.date" label="Date" type="date" :rules="[rules.required]"></v-text-field>
+          <v-text-field v-model="item.memo" label="Memo"></v-text-field>
           <v-row>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="item.payee" label="Payee"></v-text-field>
+            <v-col cols="9">
+              <v-text-field v-model.number="item.amount" label="Amount" type="number" :rules="[rules.required]"></v-text-field>
             </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="item.category" label="Category"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="item.date" label="Date"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="item.memo" label="Memo"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="item.amount" label="Amount"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
+            <v-col cols="3">
               <v-checkbox v-model="item.outflow" label="Outflow"></v-checkbox>
             </v-col>
           </v-row>
@@ -31,30 +23,41 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text @click="close">Cancel</v-btn>
-        <v-btn color="accent" text @click="save">Save</v-btn>
+        <v-btn color="accent" :disabled="submitDisabled" text @click="save">{{ submitBtn }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
-import Transaction from "./Transaction";
+import { TRANSACTION_CREATE } from '../../store/mutation-types';
+import Transaction from './transaction';
 
 export default {
-  name: "TransactionDialog",
+  name: 'TransactionDialog',
 
   props: {
     isVisible: Boolean,
-    item: new Transaction("", "", null, "", "", 0, true),
+    item: { type: Object, default: () => {} },
   },
 
   data: () => ({
     visible: false,
+    rules: {
+      required: (value) => !!value || 'Required.',
+    },
   }),
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.item.id == null ? 'New Transaction' : 'Edit Transaction';
+    },
+    submitBtn() {
+      return this.item.id == null ? 'Create' : 'Update';
+    },
+    submitDisabled() {
+      // TODO why is the instanceof workaround needed to prevent function unknown?
+      return this.item instanceof Transaction && !this.item.isValid();
     },
   },
 
@@ -67,22 +70,14 @@ export default {
   methods: {
     close() {
       this.visible = false;
-      this.$emit("dialog-closed", this.visible);
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      });
+      this.$emit('dialog-closed', this.visible);
     },
 
     save() {
-      if (this.editedIndex > -1) {
-        // TODO edit
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+      if (this.item.id == null) {
+        this.$store.commit(TRANSACTION_CREATE, this.item);
       } else {
-        this.$store.commit(
-          "addTransaction",
-          new Transaction("4", "es", "wird", new Date(), "any", 1337, false)
-        );
+        this.$store.commit('editTransaction', this.item);
       }
       this.close();
     },
@@ -90,5 +85,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
