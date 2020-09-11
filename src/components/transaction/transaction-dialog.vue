@@ -1,12 +1,12 @@
 <template>
-  <v-dialog v-model="visible" persistent max-width="500px" @keydown.esc="close">
+  <v-dialog id="dialog-transaction" v-model="visible" persistent max-width="500px" @keydown.esc="close">
     <v-card>
       <v-card-title>
-        <span class="headline">{{ formTitle }}</span>
+        <span id="dialog-transaction-title" class="headline">{{ formTitle }}</span>
       </v-card-title>
       <v-card-text>
         <v-container>
-          <v-text-field v-model="item.payee" label="Payee" :rules="[rules.required]"></v-text-field>
+          <v-text-field id="text-payee" v-model="item.payee" label="Payee" :rules="[rules.required]"></v-text-field>
           <v-text-field v-model="item.category" label="Category" :rules="[rules.required]"></v-text-field>
           <v-text-field v-model="item.date" label="Date" type="date" :rules="[rules.required]"></v-text-field>
           <v-text-field v-model="item.memo" label="Memo"></v-text-field>
@@ -22,8 +22,10 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="close">Cancel</v-btn>
-        <v-btn color="accent" :disabled="submitDisabled" text @click="save">{{ submitBtn }}</v-btn>
+        <v-btn id="btn-transaction-dialog-close" text @click="close">Cancel</v-btn>
+        <v-btn id="btn-transaction-dialog-submit" color="accent" :disabled="submitDisabled" text @click="save">
+          {{ submitBtn }}
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
