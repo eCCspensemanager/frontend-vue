@@ -38,7 +38,7 @@ export default {
 
   props: {
     isVisible: Boolean,
-    item: Object,
+    item: { type: Object, default: () => {} },
   },
 
   data: () => ({
