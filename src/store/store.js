@@ -6,6 +6,13 @@ import { TRANSACTION_CREATE } from './mutation-types';
 
 Vue.use(Vuex);
 
+export const mutations = {
+  [TRANSACTION_CREATE](state, transaction) {
+    transaction.id = generateRandomNo();
+    state.transactions.push(transaction);
+  },
+};
+
 export default new Vuex.Store({
   state: {
     transactions: [
@@ -14,12 +21,7 @@ export default new Vuex.Store({
       new Transaction(generateRandomNo(), 'ADH', 'Beer', Date(), 'Insurance', 9.99, true),
     ],
   },
-  mutations: {
-    [TRANSACTION_CREATE](state, transaction) {
-      transaction.id = generateRandomNo();
-      state.transactions.push(transaction);
-    },
-  },
+  mutations: mutations,
   actions: {},
   modules: {},
 });
