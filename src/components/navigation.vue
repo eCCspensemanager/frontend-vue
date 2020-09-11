@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer v-model="showDrawer" temporary app @input="$emit('navigation-closed', showDrawer)">
     <v-list dense nav>
-      <v-list-item v-for="item in items" :key="item.id" link :id="item.id">
+      <v-list-item v-for="item in items" :id="item.id" :key="item.id" link>
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
@@ -16,7 +16,7 @@
 <script>
 import Vue from 'vue';
 
-export default Vue.component('navigation', {
+export default Vue.component('Navigation', {
   props: {
     shouldShowDrawer: Boolean,
   },

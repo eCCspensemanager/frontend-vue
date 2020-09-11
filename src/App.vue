@@ -4,22 +4,19 @@
       <v-app-bar-nav-icon @click="shouldShowDrawer = true"></v-app-bar-nav-icon>
       <v-toolbar-title>eCCspenseManager</v-toolbar-title>
     </v-app-bar>
-    <navigation
-      v-bind:shouldShowDrawer="shouldShowDrawer"
-      v-on:navigation-closed="shouldShowDrawer = $event"
-    />
+    <Navigation :should-show-drawer="shouldShowDrawer" @navigation-closed="shouldShowDrawer = $event" />
     <v-main>
-      <transaction-table />
+      <TransactionTable />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import TransactionTable from "./components/transaction/transaction-table.vue";
-import Navigation from "./components/navigation.vue";
+import TransactionTable from './components/transaction/transaction-table.vue';
+import Navigation from './components/navigation.vue';
 
 export default {
-  name: "App",
+  name: 'App',
 
   components: {
     TransactionTable,
