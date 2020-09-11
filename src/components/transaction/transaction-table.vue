@@ -4,7 +4,7 @@
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-spacer></v-spacer>
-        <v-btn color="accent" dark class="mb-2" @click="newTransaction()">New Transaction</v-btn>
+        <v-btn id="btn-create-transaction" color="accent" dark class="mb-2" @click="newTransaction()">New Transaction</v-btn>
         <TransactionDialog :is-visible="showDialog" :item="dialogItem" @dialog-closed="showDialog = $event" />
       </v-toolbar>
     </template>
@@ -53,7 +53,7 @@ export default {
     },
 
     getAmountColor(outflow) {
-      return outflow ? 'red--text' : 'green--text';
+      return 'amount-cell ' + (outflow ? 'red--text' : 'green--text');
     },
 
     getAmount(amount) {
