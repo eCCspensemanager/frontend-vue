@@ -1,4 +1,4 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue, createWrapper } from '@vue/test-utils';
 import Vuetify from 'vuetify';
 import TransactionTable from '@/components/transaction/transaction-table.vue';
 import Vuex from 'vuex';
@@ -53,5 +53,18 @@ describe('transaction-table.vue', () => {
 
     expect(outflowCell.classes('red--text')).toBeTruthy();
     expect(inflowCell.classes('green--text')).toBeTruthy();
+  });
+
+  it('opens edit dialog with row item data', async () => {
+    // Dialog is not rendered by default
+    const editDialog = table.find('#dialog-transaction');
+    expect(editDialog.text()).toBe('');
+
+    const firstItemEditBtn = table.findAll('.mdi-pencil').at(0);
+    await firstItemEditBtn.trigger('click');
+
+    // Edit button opens dialog and passes item data
+    expect(editDialog.text()).not.toBe('');
+    expect(editDialog.props('item').payee).toBe(store.state.transactions[0].payee);
   });
 });
