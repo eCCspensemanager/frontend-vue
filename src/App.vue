@@ -6,20 +6,18 @@
     </v-app-bar>
     <Navigation :should-show-drawer="shouldShowDrawer" @navigation-closed="shouldShowDrawer = $event" />
     <v-main>
-      <TransactionTable />
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import TransactionTable from './components/transaction/transaction-table.vue';
 import Navigation from './components/navigation.vue';
 
 export default {
   name: 'App',
 
   components: {
-    TransactionTable,
     Navigation,
   },
 
