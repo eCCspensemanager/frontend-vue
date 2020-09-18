@@ -1,4 +1,4 @@
-name: Build & Test
+name: CI/CD
 on:
   push:
     branches: [ master ]
@@ -13,3 +13,14 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run test:unit
+  deploy:
+    if: ${{ github.ref == 'refs/heads/master' }}
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+      - run: npm ci
+      - run: |
+            git config user.name "techuser" && git config user.email "test@user.org"
+            npm run gh-pages-deploy
