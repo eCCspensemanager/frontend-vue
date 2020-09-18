@@ -1,18 +1,23 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import Navigation from '@/components/navigation.vue';
 import Vuetify from 'vuetify';
+import VueRouter from 'vue-router';
 
 describe('navigation.vue', () => {
+  const router = new VueRouter();
+
   let localVue;
   let vuetify;
   let wrapper;
 
   beforeEach(() => {
     localVue = createLocalVue();
+    localVue.use(VueRouter);
     vuetify = new Vuetify();
     wrapper = mount(Navigation, {
       localVue,
       vuetify,
+      router,
       propsData: { shouldShowDrawer: false },
     });
   });
@@ -28,12 +33,33 @@ describe('navigation.vue', () => {
 
   it('contains 3 menu items', () => {
     const expensesBtn = wrapper.find('#btn-expenses');
-    expect(expensesBtn.text()).toBe('Transactions');
+    expect(expensesBtn.text()).toBe('Expenses');
 
     const settingsBtn = wrapper.find('#btn-settings');
     expect(settingsBtn.text()).toBe('Settings');
 
     const aboutBtn = wrapper.find('#btn-about');
     expect(aboutBtn.text()).toBe('About');
+  });
+
+  it('routes to expenses / home page', async () => {
+    const expensesBtn = wrapper.find('#btn-expenses');
+    await expensesBtn.trigger('click');
+
+    expect(wrapper.vm.$route.path).toBe('/');
+  });
+
+  it('routes to settings page', async () => {
+    const settingsBtn = wrapper.find('#btn-settings');
+    await settingsBtn.trigger('click');
+
+    expect(wrapper.vm.$route.path).toBe('/settings');
+  });
+
+  it('routes to about page', async () => {
+    const aboutBtn = wrapper.find('#btn-about');
+    await aboutBtn.trigger('click');
+
+    expect(wrapper.vm.$route.path).toBe('/about');
   });
 });
