@@ -15,6 +15,7 @@
 
 <script>
 import Vue from 'vue';
+import { EXPENSES_ROUTE, SETTINGS_ROUTE, ABOUT_ROUTE } from '@/router/routes.js';
 
 export default Vue.component('Navigation', {
   props: {
@@ -23,9 +24,9 @@ export default Vue.component('Navigation', {
   data: () => ({
     showDrawer: false,
     items: [
-      { id: 'btn-expenses', title: 'Expenses', icon: 'mdi-cash', to: '/' },
-      { id: 'btn-settings', title: 'Settings', icon: 'mdi-cog', to: '/settings' },
-      { id: 'btn-about', title: 'About', icon: 'mdi-help-box', to: '/about' },
+      { id: 'btn-expenses', title: 'Expenses', icon: 'mdi-cash', to: EXPENSES_ROUTE },
+      { id: 'btn-settings', title: 'Settings', icon: 'mdi-cog', to: SETTINGS_ROUTE },
+      { id: 'btn-about', title: 'About', icon: 'mdi-help-box', to: ABOUT_ROUTE },
     ],
   }),
   watch: {

@@ -2,6 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import Navigation from '@/components/navigation.vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
+import { EXPENSES_ROUTE, SETTINGS_ROUTE, ABOUT_ROUTE } from '@/router/routes.js';
 
 describe('navigation.vue', () => {
   const router = new VueRouter();
@@ -46,20 +47,20 @@ describe('navigation.vue', () => {
     const expensesBtn = wrapper.find('#btn-expenses');
     await expensesBtn.trigger('click');
 
-    expect(wrapper.vm.$route.path).toBe('/');
+    expect(wrapper.vm.$route.path).toBe(EXPENSES_ROUTE);
   });
 
   it('routes to settings page', async () => {
     const settingsBtn = wrapper.find('#btn-settings');
     await settingsBtn.trigger('click');
 
-    expect(wrapper.vm.$route.path).toBe('/settings');
+    expect(wrapper.vm.$route.path).toBe(SETTINGS_ROUTE);
   });
 
   it('routes to about page', async () => {
     const aboutBtn = wrapper.find('#btn-about');
     await aboutBtn.trigger('click');
 
-    expect(wrapper.vm.$route.path).toBe('/about');
+    expect(wrapper.vm.$route.path).toBe(ABOUT_ROUTE);
   });
 });
