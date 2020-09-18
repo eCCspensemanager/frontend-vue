@@ -2,7 +2,7 @@
   <v-app class="mx-auto">
     <v-app-bar app color="primary" dark>
       <v-app-bar-nav-icon @click="shouldShowDrawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title>eCCspenseManager</v-toolbar-title>
+      <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
     </v-app-bar>
     <Navigation :should-show-drawer="shouldShowDrawer" @navigation-closed="shouldShowDrawer = $event" />
     <v-main>
@@ -24,5 +24,12 @@ export default {
   data: () => ({
     shouldShowDrawer: false,
   }),
+
+  computed: {
+    pageTitle() {
+      console.log(this.$route);
+      return this.$route.name;
+    },
+  },
 };
 </script>

@@ -14,13 +14,13 @@ const routes = [
     path: '/settings',
     name: 'Settings',
     // Generates separate chunk (settings.[hash].js), which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "settings" */ '../components/settings/settings-page.vue'),
+    component: () => import(/* webpackChunkName: "settings" */ '@/components/settings/settings-page.vue'),
   },
   {
     path: '/about',
     name: 'About',
     // Generates separate chunk (about.[hash].js), which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/about/about-page.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '@/components/about/about-page.vue'),
   },
 ];
 
