@@ -1,15 +1,15 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue, Wrapper } from '@vue/test-utils';
 import Navigation from '@/components/navigation.vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
-import { EXPENSES_ROUTE, SETTINGS_ROUTE, ABOUT_ROUTE } from '@/router/routes.js';
+import { EXPENSES_ROUTE, SETTINGS_ROUTE, ABOUT_ROUTE } from '@/router/routes';
 
 describe('navigation.vue', () => {
   const router = new VueRouter();
 
   let localVue;
   let vuetify;
-  let wrapper;
+  let wrapper: Wrapper<any>;
 
   beforeEach(() => {
     localVue = createLocalVue();

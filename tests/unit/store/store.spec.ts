@@ -1,4 +1,4 @@
-import { mutations } from '@/store/store.js';
+import { mutations } from '@/store';
 import { defaultTransaction } from '@/components/transaction/transaction';
 import { TRANSACTION_CREATE } from '@/store/mutation-types';
 

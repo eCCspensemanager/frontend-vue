@@ -7,7 +7,7 @@ import { TRANSACTION_CREATE } from './mutation-types';
 Vue.use(Vuex);
 
 export const mutations = {
-  [TRANSACTION_CREATE](state, transaction) {
+  [TRANSACTION_CREATE](state: any, transaction: Transaction) {
     transaction.id = generateRandomNo();
     state.transactions.push(transaction);
   },

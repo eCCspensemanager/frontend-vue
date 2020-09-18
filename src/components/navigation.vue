@@ -15,7 +15,7 @@
 
 <script>
 import Vue from 'vue';
-import { EXPENSES_ROUTE, SETTINGS_ROUTE, ABOUT_ROUTE } from '@/router/routes.js';
+import { EXPENSES_ROUTE, SETTINGS_ROUTE, ABOUT_ROUTE } from '@/router/routes';
 
 export default Vue.component('Navigation', {
   props: {
