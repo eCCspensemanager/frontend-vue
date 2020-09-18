@@ -27,7 +27,6 @@ export default {
 
   computed: {
     pageTitle() {
-      console.log(this.$route);
       return this.$route.name;
     },
   },
