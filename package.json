@@ -6,20 +6,22 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit --setupTestFrameworkScriptFile=./tests/setup.js",
-    "test:coverage": "vue-cli-service test:unit --coverage=true --setupTestFrameworkScriptFile=./tests/setup.js",
-    "test:local": "vue-cli-service test:unit --watch --setupTestFrameworkScriptFile=./tests/setup.js",
     "lint": "vue-cli-service lint",
-    "gh-pages-deploy": "node scripts/gh-pages-deploy.js"
+    "gh-pages-deploy": "node scripts/gh-pages-deploy.js",
+    "test:coverage": "vue-cli-service test:unit --coverage=true --setupTestFrameworkScriptFile=./tests/setup.js",
+    "test:local": "vue-cli-service test:unit --watch --setupTestFrameworkScriptFile=./tests/setup.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
+    "vue-router": "^3.4.3",
     "vuetify": "^2.2.11",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "^4.5.6",
     "@vue/cli-plugin-unit-jest": "^4.5.4",
     "@vue/cli-plugin-vuex": "^4.5.4",
     "@vue/cli-service": "~4.5.0",

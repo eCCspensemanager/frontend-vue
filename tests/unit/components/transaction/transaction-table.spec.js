@@ -1,4 +1,4 @@
-import { mount, createLocalVue, createWrapper } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import Vuetify from 'vuetify';
 import TransactionTable from '@/components/transaction/transaction-table.vue';
 import Vuex from 'vuex';
