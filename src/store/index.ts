@@ -16,9 +16,9 @@ export const mutations = {
 export default new Vuex.Store({
   state: {
     transactions: [
-      new Transaction(generateRandomNo(), 'Rewe', 'Beer', Date(), 'Groceries', 12.99, true),
-      new Transaction(generateRandomNo(), 'Cinema', 'Nils ticket', Date(), 'Entertainment', 8.5, false),
-      new Transaction(generateRandomNo(), 'ADH', 'Beer', Date(), 'Insurance', 9.99, true),
+      new Transaction(generateRandomNo(), 'Rewe', 'Beer', new Date(), 'Groceries', 12.99, true),
+      new Transaction(generateRandomNo(), 'Cinema', 'Nils ticket', new Date(), 'Entertainment', 8.5, false),
+      new Transaction(generateRandomNo(), 'ADH', 'Beer', new Date(), 'Insurance', 9.99, true),
     ],
   },
   mutations: mutations,

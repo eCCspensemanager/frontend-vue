@@ -4,7 +4,7 @@ import TransactionDialog from '@/components/transaction/transaction-dialog.vue';
 import Transaction, { defaultTransaction } from '@/components/transaction/transaction';
 
 describe('transaction-dialog.vue', () => {
-  const transaction = new Transaction('someId', 'somePayee', 'someMemo', new Date().toString(), 'someCategory', 13.37, true);
+  const transaction = new Transaction('someId', 'somePayee', 'someMemo', new Date(), 'someCategory', 13.37, true);
   const localVue = createLocalVue();
   const vuetify = new Vuetify();
 
@@ -39,12 +39,12 @@ describe('transaction-dialog.vue', () => {
     await closeBtn.trigger('click');
 
     // One 'dialog-closed' with value 'false' should've been emitted
-    let events = dialog.emitted()['dialog-closed']!
+    let events = dialog.emitted()['dialog-closed']!;
     expect(events.length).toBe(1);
     expect(events[0]).toEqual([false]);
   });
 
-  function mountDialog(transaction: Transaction, shouldRender: boolean): Wrapper<any>{
+  function mountDialog(transaction: Transaction, shouldRender: boolean): Wrapper<any> {
     // document.body.setAttribute('data-app', true);
     return mount(TransactionDialog, {
       localVue,
