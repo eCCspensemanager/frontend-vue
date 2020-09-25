@@ -1,4 +1,4 @@
-export function generateRandomNo() {
+export function generateRandomNo(): string {
   // TODO generate real UUID
   var result = '';
   var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

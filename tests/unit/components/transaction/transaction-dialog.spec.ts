@@ -1,10 +1,10 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue, Wrapper } from '@vue/test-utils';
 import Vuetify from 'vuetify';
 import TransactionDialog from '@/components/transaction/transaction-dialog.vue';
-import Transaction from '@/components/transaction/transaction';
+import Transaction, { defaultTransaction } from '@/components/transaction/transaction';
 
 describe('transaction-dialog.vue', () => {
-  const transaction = new Transaction('someId', 'somePayee', 'someMemo', '2019-02-02', 'someCategory', 13.37, true);
+  const transaction = new Transaction('someId', 'somePayee', 'someMemo', new Date(), 'someCategory', 13.37, true);
   const localVue = createLocalVue();
   const vuetify = new Vuetify();
 
@@ -19,7 +19,7 @@ describe('transaction-dialog.vue', () => {
   });
 
   it('renders create dialog', () => {
-    const dialog = mountDialog({}, true);
+    const dialog = mountDialog(defaultTransaction(), true);
 
     expect(dialog.find('#dialog-transaction-title').text()).toBe('New Transaction');
     expect(dialog.find('#btn-transaction-dialog-submit').text()).toBe('Create');
@@ -33,17 +33,18 @@ describe('transaction-dialog.vue', () => {
   });
 
   it('emits close event if close button is clicked', async () => {
-    const dialog = mountDialog(transaction, true);
+    const dialog: Wrapper<any> = mountDialog(transaction, true);
 
     const closeBtn = dialog.find('#btn-transaction-dialog-close');
     await closeBtn.trigger('click');
 
     // One 'dialog-closed' with value 'false' should've been emitted
-    expect(dialog.emitted()['dialog-closed'].length).toBe(1);
-    expect(dialog.emitted()['dialog-closed'][0]).toEqual([false]);
+    let events = dialog.emitted()['dialog-closed']!;
+    expect(events.length).toBe(1);
+    expect(events[0]).toEqual([false]);
   });
 
-  function mountDialog(transaction, shouldRender) {
+  function mountDialog(transaction: Transaction, shouldRender: boolean): Wrapper<any> {
     // document.body.setAttribute('data-app', true);
     return mount(TransactionDialog, {
       localVue,

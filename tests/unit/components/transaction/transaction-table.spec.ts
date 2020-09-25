@@ -12,8 +12,8 @@ describe('transaction-table.vue', () => {
   const store = new Vuex.Store({
     state: {
       transactions: [
-        new Transaction('id1', 'Rewe', 'Nachos', Date(), 'Groceries', 2.99, true),
-        new Transaction('id2', 'cc', 'Income', Date(), 'Groceries', 13.99, false),
+        new Transaction('id1', 'Rewe', 'Nachos', new Date(), 'Groceries', 2.99, true),
+        new Transaction('id2', 'cc', 'Income', new Date(), 'Groceries', 13.99, false),
       ],
     },
   });
