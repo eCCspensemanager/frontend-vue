@@ -17,9 +17,7 @@ describe('mutations', () => {
   });
 
   it('TRANSACTION_DELETE', () => {
-    const state = {
-      transactions: [defaultTransaction(), defaultTransaction(), defaultTransaction()],
-    };
+    const state = { transactions: [defaultTransaction()] };
 
     let transactionToDelete = state.transactions[1];
     mutations[TRANSACTION_DELETE](state, transactionToDelete);

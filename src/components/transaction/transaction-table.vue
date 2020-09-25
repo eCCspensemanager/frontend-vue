@@ -16,17 +16,20 @@
       <v-icon small class="mr-2" @click="editTransaction(item)">mdi-pencil</v-icon>
       <v-icon small @click="deleteTransaction(item)">mdi-delete</v-icon>
     </template>
+    <DeleteTransactionDialog />
   </v-data-table>
 </template>
 
 <script>
 import { defaultTransaction } from './transaction';
 import TransactionDialog from './transaction-dialog';
+import DeleteTransactionDialog from './delete-dialog';
 
 export default {
   name: 'TransactionTable',
   components: {
     TransactionDialog,
+    DeleteTransactionDialog,
   },
   data: () => ({
     headers: [
