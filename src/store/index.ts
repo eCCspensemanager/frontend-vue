@@ -1,17 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import Transaction from '../components/transaction/transaction';
+import { mutations } from './mutations';
 import { generateRandomNo } from './storage-util';
-import { TRANSACTION_CREATE } from './mutation-types';
 
 Vue.use(Vuex);
 
-export const mutations = {
-  [TRANSACTION_CREATE](state: any, transaction: Transaction) {
-    transaction.id = generateRandomNo();
-    state.transactions.push(transaction);
-  },
-};
+export interface AppState {
+  transactions: Transaction[];
+}
 
 export default new Vuex.Store({
   state: {

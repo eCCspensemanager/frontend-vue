@@ -1,10 +1,11 @@
 import ExpensesPage from '@/components/transaction/expenses-page.vue';
+import { RouteConfig } from 'vue-router';
 
 export const EXPENSES_ROUTE = '/';
 export const SETTINGS_ROUTE = '/settings';
 export const ABOUT_ROUTE = '/about';
 
-const routes = [
+const routes: RouteConfig[] = [
   {
     path: EXPENSES_ROUTE,
     name: 'Expenses',
