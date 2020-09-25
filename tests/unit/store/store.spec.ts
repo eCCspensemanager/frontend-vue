@@ -1,6 +1,6 @@
-import { mutations } from '@/store';
 import { defaultTransaction } from '@/components/transaction/transaction';
 import { TRANSACTION_CREATE } from '@/store/mutation-types';
+import { mutations } from '@/store/mutations';
 
 describe('mutations', () => {
   it('TRANSACTION_CREATE', () => {
