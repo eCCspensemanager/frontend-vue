@@ -6,6 +6,7 @@
         <v-spacer></v-spacer>
         <v-btn id="btn-create-transaction" color="accent" dark class="mb-2" @click="newTransaction()">New Transaction</v-btn>
         <TransactionDialog :is-visible="showDialog" :item="dialogItem" @dialog-closed="showDialog = $event" />
+        <DeletionConfirmation :deletion-data="deletionConfirmationData" @close-event="confirmationClosed" />
       </v-toolbar>
     </template>
     <template v-slot:[`item.date`]="{ item }">{{ formatDate(item.date) }}</template>
@@ -22,11 +23,15 @@
 <script>
 import { defaultTransaction } from './transaction';
 import TransactionDialog from './transaction-dialog';
+import DeletionConfirmation from '@/components/deletion';
+import DeletionConfirmationData from '@/components/deletion/deletion-confirmation-data';
+import { TRANSACTION_DELETE } from '@/store/mutation-types';
 
 export default {
   name: 'TransactionTable',
   components: {
     TransactionDialog,
+    DeletionConfirmation,
   },
   data: () => ({
     headers: [
@@ -39,6 +44,7 @@ export default {
     ],
     showDialog: false,
     dialogItem: {},
+    deletionConfirmationData: new DeletionConfirmationData(),
   }),
 
   computed: {
@@ -66,12 +72,18 @@ export default {
     },
 
     editTransaction(item) {
-      this.dialogItem = Object.assign({}, item);
+      this.dialogItem = item;
       this.showDialog = true;
     },
 
     deleteTransaction(item) {
-      alert('delete \n' + item);
+      this.deletionConfirmationData.show(`${item.payee} (${item.amount}€ on ${item.date.toLocaleDateString()})`, () =>
+        this.$store.commit(TRANSACTION_DELETE, item),
+      );
+    },
+
+    confirmationClosed() {
+      this.deletionConfirmationData.showConfirmation = false;
     },
   },
 };
