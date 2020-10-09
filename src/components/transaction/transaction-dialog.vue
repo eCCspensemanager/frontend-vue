@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { TRANSACTION_CREATE } from '../../store/mutation-types';
+import { TRANSACTION_CREATE, TRANSACTION_UPDATE } from '../../store/mutation-types';
 import Transaction from './transaction';
 
 export default {
@@ -79,7 +79,7 @@ export default {
       if (this.item.id == null) {
         this.$store.commit(TRANSACTION_CREATE, this.item);
       } else {
-        this.$store.commit('editTransaction', this.item);
+        this.$store.commit(TRANSACTION_UPDATE, this.item);
       }
       this.close();
     },

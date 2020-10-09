@@ -72,7 +72,7 @@ export default {
     },
 
     editTransaction(item) {
-      this.dialogItem = item;
+      this.dialogItem = Object.assign({}, item);
       this.showDialog = true;
     },
 
