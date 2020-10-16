@@ -10,7 +10,9 @@ export const mutations = {
   },
   [TRANSACTION_UPDATE](state: AppState, updatedItem: Transaction) {
     var transaction = state.transactions.find((element) => element.id == updatedItem.id);
-    Object.assign(transaction, updatedItem);
+    if (transaction != null) {
+      Object.assign(transaction, updatedItem);
+    }
   },
   [TRANSACTION_DELETE](state: AppState, transaction: Transaction) {
     var index = state.transactions.indexOf(transaction);
