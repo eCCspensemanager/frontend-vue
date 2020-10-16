@@ -1,3 +1,4 @@
+import Category from '@/components/category/category';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import Transaction from '../components/transaction/transaction';
@@ -17,6 +18,7 @@ export default new Vuex.Store({
       new Transaction(generateRandomNo(), 'Cinema', 'Nils ticket', new Date(), 'Entertainment', 8.5, false),
       new Transaction(generateRandomNo(), 'ADH', 'Beer', new Date(), 'Insurance', 9.99, true),
     ],
+    categories: [new Category('Entertainment'), new Category('Groceries')],
   },
   mutations: mutations,
   actions: {},
