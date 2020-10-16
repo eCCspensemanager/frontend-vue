@@ -10,7 +10,9 @@ export const mutations = {
   },
   [TRANSACTION_UPDATE](state: AppState, updatedItem: Transaction) {
     var transaction = state.transactions.find((element) => element.id == updatedItem.id);
-    if (transaction != null) {
+    if (transaction == null) {
+      console.log('Transaction update failed: ID not found in store');
+    } else {
       Object.assign(transaction, updatedItem);
     }
   },

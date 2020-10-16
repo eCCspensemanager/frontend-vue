@@ -49,6 +49,7 @@ describe('mutations', () => {
       mutations[TRANSACTION_UPDATE](state, updatedTransaction);
 
       expect(state.transactions[0]).toEqual(initialTransaction);
+      expect(state.transactions.length).toBe(1);
     });
   });
 
