@@ -1,11 +1,12 @@
 import Transaction, { defaultTransaction } from '@/components/transaction/transaction';
+import { AppState } from '@/store';
 import { TRANSACTION_CREATE, TRANSACTION_DELETE, TRANSACTION_UPDATE } from '@/store/mutation-types';
 import { mutations } from '@/store/mutations';
 
 describe('mutations', () => {
   describe('TRANSACTION_CREATE', () => {
     it('adds the transaction to the state', () => {
-      const state = { transactions: [] };
+      const state = createState();
       const newTransaction = defaultTransaction();
 
       mutations[TRANSACTION_CREATE](state, newTransaction);
@@ -15,7 +16,7 @@ describe('mutations', () => {
     });
 
     it('generates transaction ID', () => {
-      const state = { transactions: [] };
+      const state = createState();
       const newTransaction = defaultTransaction();
       expect(newTransaction.id).toBeNull();
 
@@ -30,7 +31,8 @@ describe('mutations', () => {
       const originalItem = defaultTransaction();
       originalItem.id = 'someId';
       const defaultItem = defaultTransaction();
-      const state = { transactions: [defaultItem, originalItem] };
+      const state = createState();
+      state.transactions = [defaultItem, originalItem];
 
       const updatedItem = Object.assign({}, originalItem);
       updatedItem.id = 'someId';
@@ -43,7 +45,8 @@ describe('mutations', () => {
 
     it('can handle wrong transaction ID', () => {
       const initialTransaction = defaultTransaction();
-      const state = { transactions: [initialTransaction] };
+      const state = createState();
+      state.transactions = [initialTransaction];
 
       const updatedTransaction = new Transaction('someId', '', '', new Date(), '', 2.5, true);
       mutations[TRANSACTION_UPDATE](state, updatedTransaction);
@@ -55,7 +58,8 @@ describe('mutations', () => {
 
   describe('TRANSACTION_DELETE', () => {
     it('removes transaction from state', () => {
-      const state = { transactions: [defaultTransaction()] };
+      const state = createState();
+      state.transactions = [defaultTransaction()];
 
       let transactionToDelete = state.transactions[1];
       mutations[TRANSACTION_DELETE](state, transactionToDelete);
@@ -64,3 +68,10 @@ describe('mutations', () => {
     });
   });
 });
+
+function createState(): AppState {
+  return {
+    transactions: [],
+    categories: [],
+  };
+}

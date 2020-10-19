@@ -1,7 +1,10 @@
 <template>
-  <v-list max-height="300px" class="overflow-y-auto">
+  <v-list dense height="300px" class="overflow-y-auto">
     <v-list-item v-for="category in categories" :id="category.id" :key="category.id">
-      <v-list-item-content>{{ category.name }}</v-list-item-content>
+      <v-list-item-content>
+        {{ category.name }}
+        <v-divider class="mt-4" />
+      </v-list-item-content>
     </v-list-item>
   </v-list>
 </template>

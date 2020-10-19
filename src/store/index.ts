@@ -9,6 +9,7 @@ Vue.use(Vuex);
 
 export interface AppState {
   transactions: Transaction[];
+  categories: Category[];
 }
 
 export default new Vuex.Store({

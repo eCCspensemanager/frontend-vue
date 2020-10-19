@@ -3,6 +3,7 @@
     <v-container max-width="600px">
       <SettingsElement :heading="categoriesHeading">
         <CategoryList />
+        <CreateCategory />
       </SettingsElement>
     </v-container>
   </div>
@@ -10,6 +11,7 @@
 
 <script>
 import CategoryList from '@/components/category/category-list';
+import CreateCategory from '@/components/category/create-category';
 import SettingsElement from '@/components/settings/settings-element';
 
 export default {
@@ -17,6 +19,7 @@ export default {
   components: {
     SettingsElement,
     CategoryList,
+    CreateCategory,
   },
   data: () => ({
     categoriesHeading: 'Categories',
