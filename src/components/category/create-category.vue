@@ -5,7 +5,7 @@
         <v-text-field v-model="category" height="30" label="New category" outlined />
       </v-col>
       <v-col offset-md="1">
-        <v-btn primary @click="create">Create</v-btn>
+        <v-btn color="accent" :disabled="createDisabled" @click="create">Create</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -21,6 +21,19 @@ export default {
   data: () => ({
     category: '',
   }),
+
+  computed: {
+    createDisabled() {
+      let categoryAlreadyExists = this.$store.state.categories
+        .map((item) => {
+          return item.name;
+        })
+        .includes(this.category);
+      let emptyTextfield = this.category == '';
+
+      return emptyTextfield || categoryAlreadyExists;
+    },
+  },
 
   methods: {
     create() {
