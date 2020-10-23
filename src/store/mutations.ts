@@ -20,7 +20,7 @@ export const mutations = {
     state.transactions.splice(index, 1);
   },
 
-  // Q4 extract into transactions-mutations + category-mutations?
+  // TODO: extract mutations and state into package specific
   [CATEGORY_CREATE](state: AppState, category: Category) {
     category.id = generateRandomNo();
     state.categories.push(category);

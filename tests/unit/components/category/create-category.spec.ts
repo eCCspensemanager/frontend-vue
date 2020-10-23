@@ -1,20 +1,10 @@
 import { mount } from '@vue/test-utils';
 
 import CreateCategory from '@/components/category/create-category.vue';
-import { baseVue, baseVueWithCategories } from '../../../setup';
+import { baseVue } from '../../../setup';
 import Category from '@/components/category/category';
 
 describe('create-category.vue', () => {
-  it('renders textfield and button', () => {
-    const component = mount(CreateCategory, baseVue());
-
-    //const textfield = component.find('.v-input');
-    // Q3 why does this fail?! expect(textfield.text()).toBe('New category');
-
-    const createBtn = component.find('button');
-    expect(createBtn.text()).toBe('Create');
-  });
-
   it('disables the button if no text is entered', async () => {
     const component = mount(CreateCategory, baseVue());
     const textfield = component.find('[data-test="categoryText"]');
@@ -29,7 +19,12 @@ describe('create-category.vue', () => {
   });
 
   it('disables the button if category already existing', async () => {
-    const component = mount(CreateCategory, baseVueWithCategories([new Category('Entertainment')]));
+    const component = mount(
+      CreateCategory,
+      baseVue({
+        categories: [new Category('Entertainment')],
+      }),
+    );
     const textfield = component.find('[data-test="categoryText"]');
     const createBtn = component.find('button');
 

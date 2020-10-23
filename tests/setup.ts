@@ -8,21 +8,24 @@ import { mutations } from '@/store/mutations';
 
 Vue.use(Vuetify);
 
-export function baseVueWithCategories(categories: Category[] = []) {
-  return baseVue([], categories);
+interface BaseVueInput {
+  transactions?: Transaction[];
+  categories?: Category[];
+  options?: any;
 }
 
-export function baseVue(transactions: Transaction[] = [], categories: Category[] = []) {
+export function baseVue(input?: BaseVueInput) {
   const localVue = createLocalVue();
   localVue.use(Vuex);
   const vuetify = new Vuetify();
   const store = new Vuex.Store({
     state: {
-      transactions: transactions,
-      categories: categories,
+      transactions: input?.transactions ?? [],
+      categories: input?.categories ?? [],
     },
     mutations: mutations,
   });
 
-  return { localVue, vuetify, store };
+  const options = input?.options ?? {};
+  return { localVue, vuetify, store, ...options };
 }
