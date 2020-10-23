@@ -2,7 +2,7 @@
   <v-container max-height="100px" class="text-xs-center">
     <v-row justify="center" align="center" cols="8" class="px-4">
       <v-col md="5">
-        <v-text-field v-model="category" height="30" label="New category" outlined />
+        <v-text-field v-model="category" data-test="categoryText" height="30" label="New category" outlined />
       </v-col>
       <v-col offset-md="1">
         <v-btn color="accent" :disabled="createDisabled" @click="create">Create</v-btn>

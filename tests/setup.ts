@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import { createLocalVue } from '@vue/test-utils';
 import Category from '@/components/category/category';
 import Transaction from '@/components/transaction/transaction';
+import { mutations } from '@/store/mutations';
 
 Vue.use(Vuetify);
 
@@ -11,7 +12,7 @@ export function baseVueWithCategories(categories: Category[] = []) {
   return baseVue([], categories);
 }
 
-export function baseVue(transactions: Transaction[] | null = [], categories: Category[] = []) {
+export function baseVue(transactions: Transaction[] = [], categories: Category[] = []) {
   const localVue = createLocalVue();
   localVue.use(Vuex);
   const vuetify = new Vuetify();
@@ -20,6 +21,7 @@ export function baseVue(transactions: Transaction[] | null = [], categories: Cat
       transactions: transactions,
       categories: categories,
     },
+    mutations: mutations,
   });
 
   return { localVue, vuetify, store };
