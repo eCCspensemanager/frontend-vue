@@ -19,6 +19,8 @@ export const mutations = {
     var index = state.transactions.indexOf(transaction);
     state.transactions.splice(index, 1);
   },
+
+  // Q4 extract into transactions-mutations + category-mutations?
   [CATEGORY_CREATE](state: AppState, category: Category) {
     category.id = generateRandomNo();
     state.categories.push(category);

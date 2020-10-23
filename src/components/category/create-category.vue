@@ -1,10 +1,10 @@
 <template>
-  <v-container max-height="100px" class="text-xs-center">
-    <v-row justify="center" align="center" cols="8" class="px-4">
+  <v-container max-height="100px">
+    <v-row cols="8" class="px-4">
       <v-col md="5">
-        <v-text-field v-model="category" data-test="categoryText" height="30" label="New category" outlined />
+        <v-text-field v-model="category" data-test="categoryText" height="30" label="New category" outlined dense />
       </v-col>
-      <v-col offset-md="1">
+      <v-col>
         <v-btn color="accent" :disabled="createDisabled" @click="create">Create</v-btn>
       </v-col>
     </v-row>
