@@ -2,9 +2,10 @@ import { mount, createLocalVue, Wrapper } from '@vue/test-utils';
 import Vuetify from 'vuetify';
 import TransactionDialog from '@/components/transaction/transaction-dialog.vue';
 import Transaction, { defaultTransaction } from '@/components/transaction/transaction';
+import Category from '@/components/category/category';
 
 describe('transaction-dialog.vue', () => {
-  const transaction = new Transaction('someId', 'somePayee', 'someMemo', new Date(), 'someCategory', 13.37, true);
+  const transaction = new Transaction('someId', 'somePayee', 'someMemo', new Date(), new Category('someCategory'), 13.37, true);
   const localVue = createLocalVue();
   const vuetify = new Vuetify();
 

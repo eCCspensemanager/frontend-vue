@@ -38,7 +38,7 @@ export default {
       { text: 'Payee', align: 'start', value: 'payee' },
       { text: 'Memo', align: 'start', value: 'memo' },
       { text: 'Date', align: 'start', value: 'date' },
-      { text: 'Category', align: 'start', value: 'category' },
+      { text: 'Category', align: 'start', value: 'category.name' },
       { text: 'Amount', align: 'end', value: 'amount' },
       { text: 'Actions', align: 'center', value: 'actions', sortable: false },
     ],

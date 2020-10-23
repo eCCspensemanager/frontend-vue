@@ -3,6 +3,7 @@ import Vuetify from 'vuetify';
 import TransactionTable from '@/components/transaction/transaction-table.vue';
 import Vuex from 'vuex';
 import Transaction from '../../../../src/components/transaction/transaction';
+import Category from '@/components/category/category';
 
 describe('transaction-table.vue', () => {
   const localVue = createLocalVue();
@@ -12,8 +13,8 @@ describe('transaction-table.vue', () => {
   const store = new Vuex.Store({
     state: {
       transactions: [
-        new Transaction('id1', 'Rewe', 'Nachos', new Date(), 'Groceries', 2.99, true),
-        new Transaction('id2', 'cc', 'Income', new Date(), 'Groceries', 13.99, false),
+        new Transaction('id1', 'Rewe', 'Nachos', new Date(), new Category('Groceries'), 2.99, true),
+        new Transaction('id2', 'cc', 'Income', new Date(), new Category('Groceries'), 13.99, false),
       ],
     },
   });

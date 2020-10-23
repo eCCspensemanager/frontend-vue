@@ -37,7 +37,7 @@ describe('transactions', () => {
 
       const updatedItem = Object.assign({}, originalItem);
       updatedItem.id = 'someId';
-      updatedItem.category = 'my category';
+      updatedItem.category = new Category('my category');
       mutations[TRANSACTION_UPDATE](state, updatedItem);
 
       expect(state.transactions[0]).toEqual(defaultItem);
@@ -49,7 +49,7 @@ describe('transactions', () => {
       const state = createState();
       state.transactions = [initialTransaction];
 
-      const updatedTransaction = new Transaction('someId', '', '', new Date(), '', 2.5, true);
+      const updatedTransaction = new Transaction('someId', '', '', new Date(), null, 2.5, true);
       mutations[TRANSACTION_UPDATE](state, updatedTransaction);
 
       expect(state.transactions[0]).toEqual(initialTransaction);
