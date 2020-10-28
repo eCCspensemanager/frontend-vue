@@ -1,10 +1,8 @@
 <template>
-  <div class="align-center mb-6 mt-6">
-    <v-container id="about-container">
-      <v-card class="pa-3" max-height="500px">
-        <GithubLink />
-      </v-card>
-    </v-container>
+  <div class="mb-6 mt-6">
+    <v-card class="pa-3" max-height="500px">
+      <GithubLink />
+    </v-card>
   </div>
 </template>
 
@@ -18,10 +16,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-#about-container {
-  max-width: 60%;
-  min-width: 400px;
-}
-</style>

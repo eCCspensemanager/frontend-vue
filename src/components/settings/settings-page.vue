@@ -1,11 +1,9 @@
 <template>
-  <div class="align-center mb-6 mt-6">
-    <v-container id="settings-container">
-      <SettingsElement :heading="categoriesHeading">
-        <CategoryList />
-        <CreateCategory />
-      </SettingsElement>
-    </v-container>
+  <div class="mb-6 mt-6">
+    <SettingsElement :heading="categoriesHeading">
+      <CategoryList />
+      <CreateCategory />
+    </SettingsElement>
   </div>
 </template>
 
@@ -26,10 +24,3 @@ export default {
   }),
 };
 </script>
-
-<style scoped>
-#settings-container {
-  max-width: 60%;
-  min-width: 400px;
-}
-</style>
