@@ -8,7 +8,7 @@
         <v-container>
           <v-text-field id="text-payee" v-model="item.payee" label="Payee" :rules="[rules.required]"></v-text-field>
           <CategoryPicker :value="item.category" @category-selected="item.category = $event" />
-          <v-text-field v-model="item.date" label="Date" type="date" :rules="[rules.required]"></v-text-field>
+          <v-text-field :value="formattedDate" label="Date" type="date" :rules="[rules.required]" @input="dateChanged"></v-text-field>
           <v-text-field v-model="item.memo" label="Memo"></v-text-field>
           <v-row>
             <v-col cols="9">
@@ -56,6 +56,13 @@ export default {
   }),
 
   computed: {
+    formattedDate() {
+      let date = '';
+      if (this.item.date) {
+        date = this.item.date.toISOString().substring(0, 10);
+      }
+      return date;
+    },
     formTitle() {
       return this.item.id == null ? 'New Transaction' : 'Edit Transaction';
     },
@@ -75,6 +82,10 @@ export default {
   },
 
   methods: {
+    dateChanged(event) {
+      this.item.date = new Date(event);
+    },
+
     close() {
       this.visible = false;
       this.$emit('dialog-closed', this.visible);
@@ -91,5 +102,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

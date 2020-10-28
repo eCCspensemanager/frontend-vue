@@ -39,6 +39,5 @@ export default {
 .content-body {
   max-width: 70%;
   min-width: 400px;
-  align-content: center;
 }
 </style>
