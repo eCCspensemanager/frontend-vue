@@ -2,24 +2,18 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import Vuetify from 'vuetify';
 import TransactionTable from '@/components/transaction/transaction-table.vue';
 import Vuex from 'vuex';
-import Transaction from '../../../../src/components/transaction/transaction';
 import Category from '@/components/category/category';
+import Transaction from '@/components/transaction/transaction';
+import { baseVue } from '../../../setup';
 
 describe('transaction-table.vue', () => {
-  const localVue = createLocalVue();
-  localVue.use(Vuex);
-  const vuetify = new Vuetify();
-
-  const store = new Vuex.Store({
-    state: {
-      transactions: [
-        new Transaction('id1', 'Rewe', 'Nachos', new Date(), new Category('Groceries'), 2.99, true),
-        new Transaction('id2', 'cc', 'Income', new Date(), new Category('Groceries'), 13.99, false),
-      ],
-    },
+  const vue = baseVue({
+    transactions: [
+      new Transaction('id1', 'Rewe', 'Nachos', new Date(), new Category('Groceries'), 2.99, true),
+      new Transaction('id2', 'cc', 'Income', new Date(), new Category('Groceries'), 13.99, false),
+    ],
   });
-
-  const table = mount(TransactionTable, { localVue, vuetify, store });
+  const table = mount(TransactionTable, vue);
 
   it('renders column headers correctly', () => {
     let columnHeaders = table.findAll('.v-data-table-header th');
@@ -66,6 +60,6 @@ describe('transaction-table.vue', () => {
 
     // Edit button opens dialog and passes item data
     expect(editDialog.text()).not.toBe('');
-    expect(editDialog.props('item').payee).toBe(store.state.transactions[0].payee);
+    expect(editDialog.props('item').payee).toBe(vue.store.state.transactions[0].payee);
   });
 });

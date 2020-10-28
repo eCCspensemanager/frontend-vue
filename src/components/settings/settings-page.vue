@@ -1,11 +1,9 @@
 <template>
-  <div class="align-center mb-6 mt-6">
-    <v-container max-width="600px">
-      <SettingsElement :heading="categoriesHeading">
-        <CategoryList />
-        <CreateCategory />
-      </SettingsElement>
-    </v-container>
+  <div class="mb-6 mt-6">
+    <SettingsElement :heading="categoriesHeading">
+      <CategoryList />
+      <CreateCategory />
+    </SettingsElement>
   </div>
 </template>
 

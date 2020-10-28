@@ -1,5 +1,7 @@
 <template>
-  <TransactionTable />
+  <v-card class="mt-6">
+    <TransactionTable />
+  </v-card>
 </template>
 
 <script>

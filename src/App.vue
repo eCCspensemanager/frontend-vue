@@ -6,7 +6,9 @@
     </v-app-bar>
     <Navigation :should-show-drawer="shouldShowDrawer" @navigation-closed="shouldShowDrawer = $event" />
     <v-main>
-      <router-view />
+      <v-container class="content-body">
+        <router-view />
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -32,3 +34,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.content-body {
+  max-width: 70%;
+  min-width: 400px;
+  align-content: center;
+}
+</style>
