@@ -8,13 +8,7 @@
         <v-container>
           <v-text-field id="text-payee" v-model="item.payee" label="Payee" :rules="[rules.required]"></v-text-field>
           <CategoryPicker :value="item.category" @category-selected="item.category = $event" />
-          <v-text-field
-            :value="formattedDate"
-            label="Date"
-            type="date"
-            :rules="[rules.required]"
-            @input="item.date = new Date($event)"
-          ></v-text-field>
+          <v-text-field :value="formattedDate" label="Date" type="date" :rules="[rules.required]" @input="dateChanged"></v-text-field>
           <v-text-field v-model="item.memo" label="Memo"></v-text-field>
           <v-row>
             <v-col cols="9">
@@ -76,6 +70,7 @@ export default {
       return this.item.id == null ? 'Create' : 'Update';
     },
     submitDisabled() {
+      // TODO why is the instanceof workaround needed to prevent function unknown?
       return this.item instanceof Transaction && !this.item.isValid();
     },
   },
@@ -87,6 +82,10 @@ export default {
   },
 
   methods: {
+    dateChanged(event) {
+      this.item.date = new Date(event);
+    },
+
     close() {
       this.visible = false;
       this.$emit('dialog-closed', this.visible);
