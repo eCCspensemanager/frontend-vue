@@ -1,11 +1,13 @@
+import Category from '@/components/category/category';
 import Transaction, { defaultTransaction } from '@/components/transaction/transaction';
-import { TRANSACTION_CREATE, TRANSACTION_DELETE, TRANSACTION_UPDATE } from '@/store/mutation-types';
+import { AppState } from '@/store';
+import { CATEGORY_CREATE, TRANSACTION_CREATE, TRANSACTION_DELETE, TRANSACTION_UPDATE } from '@/store/mutation-types';
 import { mutations } from '@/store/mutations';
 
-describe('mutations', () => {
+describe('transactions', () => {
   describe('TRANSACTION_CREATE', () => {
     it('adds the transaction to the state', () => {
-      const state = { transactions: [] };
+      const state = createState();
       const newTransaction = defaultTransaction();
 
       mutations[TRANSACTION_CREATE](state, newTransaction);
@@ -15,7 +17,7 @@ describe('mutations', () => {
     });
 
     it('generates transaction ID', () => {
-      const state = { transactions: [] };
+      const state = createState();
       const newTransaction = defaultTransaction();
       expect(newTransaction.id).toBeNull();
 
@@ -30,11 +32,12 @@ describe('mutations', () => {
       const originalItem = defaultTransaction();
       originalItem.id = 'someId';
       const defaultItem = defaultTransaction();
-      const state = { transactions: [defaultItem, originalItem] };
+      const state = createState();
+      state.transactions = [defaultItem, originalItem];
 
       const updatedItem = Object.assign({}, originalItem);
       updatedItem.id = 'someId';
-      updatedItem.category = 'my category';
+      updatedItem.category = new Category('my category');
       mutations[TRANSACTION_UPDATE](state, updatedItem);
 
       expect(state.transactions[0]).toEqual(defaultItem);
@@ -43,9 +46,10 @@ describe('mutations', () => {
 
     it('can handle wrong transaction ID', () => {
       const initialTransaction = defaultTransaction();
-      const state = { transactions: [initialTransaction] };
+      const state = createState();
+      state.transactions = [initialTransaction];
 
-      const updatedTransaction = new Transaction('someId', '', '', new Date(), '', 2.5, true);
+      const updatedTransaction = new Transaction('someId', '', '', new Date(), null, 2.5, true);
       mutations[TRANSACTION_UPDATE](state, updatedTransaction);
 
       expect(state.transactions[0]).toEqual(initialTransaction);
@@ -55,7 +59,8 @@ describe('mutations', () => {
 
   describe('TRANSACTION_DELETE', () => {
     it('removes transaction from state', () => {
-      const state = { transactions: [defaultTransaction()] };
+      const state = createState();
+      state.transactions = [defaultTransaction()];
 
       let transactionToDelete = state.transactions[1];
       mutations[TRANSACTION_DELETE](state, transactionToDelete);
@@ -64,3 +69,34 @@ describe('mutations', () => {
     });
   });
 });
+
+describe('categories', () => {
+  describe('CATEGORY_CREATE', () => {
+    it('adds the category to the state', () => {
+      const state = createState();
+      const newCategory = new Category('Insurance');
+
+      mutations[CATEGORY_CREATE](state, newCategory);
+
+      expect(state.categories.length).toBe(1);
+      expect(state.categories[0]).toEqual(newCategory);
+    });
+
+    it('generates category ID', () => {
+      const state = createState();
+      const newCategory = new Category('');
+      expect(newCategory.id).toBeNull();
+
+      mutations[CATEGORY_CREATE](state, newCategory);
+
+      expect(newCategory.id).not.toBeNull();
+    });
+  });
+});
+
+function createState(): AppState {
+  return {
+    transactions: [],
+    categories: [],
+  };
+}

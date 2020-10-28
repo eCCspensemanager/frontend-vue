@@ -7,7 +7,7 @@
       <v-card-text>
         <v-container>
           <v-text-field id="text-payee" v-model="item.payee" label="Payee" :rules="[rules.required]"></v-text-field>
-          <v-text-field v-model="item.category" label="Category" :rules="[rules.required]"></v-text-field>
+          <CategoryPicker :value="item.category" @category-selected="item.category = $event" />
           <v-text-field v-model="item.date" label="Date" type="date" :rules="[rules.required]"></v-text-field>
           <v-text-field v-model="item.memo" label="Memo"></v-text-field>
           <v-row>
@@ -34,9 +34,14 @@
 <script>
 import { TRANSACTION_CREATE, TRANSACTION_UPDATE } from '../../store/mutation-types';
 import Transaction from './transaction';
+import CategoryPicker from '@/components/category/category-picker';
 
 export default {
   name: 'TransactionDialog',
+
+  components: {
+    CategoryPicker,
+  },
 
   props: {
     isVisible: Boolean,

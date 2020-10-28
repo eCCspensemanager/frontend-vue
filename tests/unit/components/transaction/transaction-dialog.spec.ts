@@ -2,11 +2,11 @@ import { mount, createLocalVue, Wrapper } from '@vue/test-utils';
 import Vuetify from 'vuetify';
 import TransactionDialog from '@/components/transaction/transaction-dialog.vue';
 import Transaction, { defaultTransaction } from '@/components/transaction/transaction';
+import Category from '@/components/category/category';
+import { baseVue } from '../../../setup';
 
 describe('transaction-dialog.vue', () => {
-  const transaction = new Transaction('someId', 'somePayee', 'someMemo', new Date(), 'someCategory', 13.37, true);
-  const localVue = createLocalVue();
-  const vuetify = new Vuetify();
+  const transaction = new Transaction('someId', 'somePayee', 'someMemo', new Date(), new Category('someCategory'), 13.37, true);
 
   it('renders based on the "isVisible" property', async () => {
     const dialog = mountDialog(transaction, false);
@@ -45,12 +45,11 @@ describe('transaction-dialog.vue', () => {
   });
 
   function mountDialog(transaction: Transaction, shouldRender: boolean): Wrapper<any> {
-    // document.body.setAttribute('data-app', true);
-    return mount(TransactionDialog, {
-      localVue,
-      vuetify,
+    const options = {
       data: () => (shouldRender ? { visible: true } : {}),
       propsData: { item: transaction },
-    });
+    };
+
+    return mount(TransactionDialog, baseVue({ options: options }));
   }
 });

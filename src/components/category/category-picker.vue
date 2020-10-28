@@ -1,0 +1,40 @@
+<template>
+  <v-autocomplete v-model="buffer" :items="items" @change="categorySelected($event)" />
+</template>
+
+<script>
+import Category from './category';
+export default {
+  name: 'CategoryPicker',
+
+  props: {
+    value: { type: Category, default: () => {} },
+  },
+
+  data: function () {
+    return { buffer: this.value };
+  },
+
+  computed: {
+    items() {
+      let items = this.$store.state.categories.map((item) => {
+        return { text: item.name, value: item, disabled: false };
+      });
+
+      return items;
+    },
+  },
+
+  watch: {
+    value: function (newVal) {
+      this.buffer = newVal;
+    },
+  },
+
+  methods: {
+    categorySelected(newCategory) {
+      this.$emit('category-selected', newCategory);
+    },
+  },
+};
+</script>

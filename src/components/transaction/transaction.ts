@@ -1,13 +1,15 @@
+import Category from '@/components/category/category';
+
 export default class Transaction {
   id: string | null;
   payee: string;
   memo: string;
   date: Date;
-  category: string;
+  category: Category | null;
   amount: number;
   outflow: boolean;
 
-  constructor(id: string | null = null, payee: string, memo: string, date: Date, category: string, amount: number, outflow: boolean) {
+  constructor(id: string | null = null, payee: string, memo: string, date: Date, category: Category | null, amount: number, outflow: boolean) {
     this.id = id;
     this.payee = payee;
     this.memo = memo;
@@ -23,5 +25,5 @@ export default class Transaction {
 }
 
 export function defaultTransaction() {
-  return new Transaction(null, '', '', new Date(), '', 1.23, true);
+  return new Transaction(null, '', '', new Date(), null, 1.23, true);
 }
