@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 
 import CreateCategory from '@/components/category/create-category.vue';
-import { baseVue } from '../../../setup';
+import { baseVue } from '@/tests/setup';
 import Category from '@/components/category/category';
 
 describe('create-category.vue', () => {

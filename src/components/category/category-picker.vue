@@ -11,9 +11,7 @@ export default {
     value: { type: Category, default: () => {} },
   },
 
-  data: function () {
-    return { buffer: this.value };
-  },
+  data: (vm) => ({ buffer: vm.value }),
 
   computed: {
     items() {
