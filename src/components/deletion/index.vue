@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import DeletionConfirmationData from './deletion-confirmation-data';
+import DeletionConfirmationData from '@/components/deletion/data/deletion-confirmation-data';
 
 export default {
   name: 'DeletionConfirmation',

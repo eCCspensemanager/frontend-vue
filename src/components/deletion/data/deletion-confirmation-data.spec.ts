@@ -1,4 +1,4 @@
-import DeletionConfirmationData from '@/components/deletion/deletion-confirmation-data';
+import DeletionConfirmationData from '@/components/deletion/data/deletion-confirmation-data';
 
 describe('deletion-confirmation-data', () => {
   it('constructs values to correct default', () => {

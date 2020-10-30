@@ -3,10 +3,11 @@ import App from '@/App.vue';
 import vuetify from '@/plugins/vuetify';
 import store from '@/store';
 import router from '@/router';
-import { CATEGORY_CREATE, TRANSACTION_CREATE } from '@/store/mutation-types';
-import Transaction from '@/components/transaction/transaction';
+import { TRANSACTION_CREATE } from '@/components/transaction/store';
+import Transaction from '@/components/transaction/store/transaction';
 import { generateRandomNo } from '@/store/storage-util';
-import Category from '@/components/category/category';
+import Category from '@/components/category/store/category';
+import { CATEGORY_CREATE } from './components/category/store';
 
 Vue.config.productionTip = false;
 

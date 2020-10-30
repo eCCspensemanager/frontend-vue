@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import CategoryList from '@/components/category/category-list';
-import CreateCategory from '@/components/category/create-category';
-import SettingsElement from '@/components/settings/settings-element';
+import CategoryList from '@/components/category/list/category-list';
+import CreateCategory from '@/components/category/create/create-category';
+import SettingsElement from '@/components/settings/element/settings-element';
 
 export default {
   name: 'SettingsPage',

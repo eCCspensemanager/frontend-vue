@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Category from './category';
+import Category from '@/components/category/store/category';
 export default {
   name: 'CategoryPicker',
 
@@ -15,7 +15,7 @@ export default {
 
   computed: {
     items() {
-      let items = this.$store.state.categories.map((item) => {
+      let items = this.$store.state.category.categories.map((item) => {
         return { text: item.name, value: item, disabled: false };
       });
 

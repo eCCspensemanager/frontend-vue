@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TransactionTable from '@/components/transaction/transaction-table.vue';
+import TransactionTable from '@/components/transaction/table/transaction-table';
 
 export default {
   name: 'ExpensesPage',

@@ -1,7 +1,7 @@
-import { mount, createLocalVue } from '@vue/test-utils';
-import TransactionTable from '@/components/transaction/transaction-table.vue';
-import Category from '@/components/category/category';
-import Transaction from '@/components/transaction/transaction';
+import { mount } from '@vue/test-utils';
+import TransactionTable from '@/components/transaction/table/transaction-table.vue';
+import Category from '@/components/category/store/category';
+import Transaction from '@/components/transaction/store/transaction';
 import { baseVue } from '@/tests/setup';
 
 describe('transaction-table.vue', () => {
@@ -58,6 +58,6 @@ describe('transaction-table.vue', () => {
 
     // Edit button opens dialog and passes item data
     expect(editDialog.text()).not.toBe('');
-    expect(editDialog.props('item').payee).toBe(vue.store.state.transactions[0].payee);
+    expect(editDialog.props('item').payee).toBe(vue.store.state.transaction.transactions[0].payee);
   });
 });

@@ -2,9 +2,10 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import Vuex from 'vuex';
 import { createLocalVue } from '@vue/test-utils';
-import Category from '@/components/category/category';
-import Transaction from '@/components/transaction/transaction';
-import { mutations } from '@/store/mutations';
+import Category from '@/components/category/store/category';
+import Transaction from '@/components/transaction/store/transaction';
+import { transactionGetters, transactionMutations } from '@/components/transaction/store';
+import { categoryMutations, categoryGetters } from '@/components/category/store';
 
 Vue.use(Vuetify);
 
@@ -19,11 +20,18 @@ export function baseVue(input?: BaseVueInput) {
   localVue.use(Vuex);
   const vuetify = new Vuetify();
   const store = new Vuex.Store({
-    state: {
-      transactions: input?.transactions ?? [],
-      categories: input?.categories ?? [],
+    modules: {
+      category: {
+        state: { categories: input?.categories ?? [] },
+        mutations: categoryMutations,
+        getters: categoryGetters,
+      },
+      transaction: {
+        state: { transactions: input?.transactions ?? [] },
+        mutations: transactionMutations,
+        getters: transactionGetters,
+      },
     },
-    mutations: mutations,
   });
 
   const options = input?.options ?? {};

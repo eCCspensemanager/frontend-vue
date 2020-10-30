@@ -1,4 +1,4 @@
-import Category from '@/components/category/category';
+import Category from '@/components/category/store/category';
 
 export default class Transaction {
   id: string | null;

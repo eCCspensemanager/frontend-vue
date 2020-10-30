@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import { TRANSACTION_CREATE, TRANSACTION_UPDATE } from '../../store/mutation-types';
-import Transaction from './transaction';
-import CategoryPicker from '@/components/category/category-picker';
+import { TRANSACTION_CREATE, TRANSACTION_UPDATE } from '@/components/transaction/store';
+import Transaction from '@/components/transaction/store/transaction';
+import CategoryPicker from '@/components/category/picker/category-picker';
 
 export default {
   name: 'TransactionDialog',

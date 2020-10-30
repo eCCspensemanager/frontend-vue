@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import { defaultTransaction } from './transaction';
-import TransactionDialog from './transaction-dialog';
+import { defaultTransaction } from '@/components/transaction/store/transaction';
+import TransactionDialog from '@/components/transaction/dialog/transaction-dialog';
 import DeletionConfirmation from '@/components/deletion';
-import DeletionConfirmationData from '@/components/deletion/deletion-confirmation-data';
-import { TRANSACTION_DELETE } from '@/store/mutation-types';
+import DeletionConfirmationData from '@/components/deletion/data/deletion-confirmation-data';
+import { TRANSACTION_DELETE } from '@/components/transaction/store';
 
 export default {
   name: 'TransactionTable',
@@ -49,7 +49,7 @@ export default {
 
   computed: {
     transactions: function () {
-      return this.$store.state.transactions;
+      return this.$store.state.transaction.transactions;
     },
   },
 
