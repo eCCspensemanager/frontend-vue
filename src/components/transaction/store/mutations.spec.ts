@@ -1,8 +1,6 @@
 import Category from '@/components/category/store/category';
-import Transaction, { defaultTransaction } from '@/components/transaction/transaction';
-import { AppState } from '@/store';
-import { TRANSACTION_CREATE, TRANSACTION_DELETE, TRANSACTION_UPDATE } from '@/store/mutation-types';
-import { mutations } from '@/store/mutations';
+import Transaction, { defaultTransaction } from '@/components/transaction/store/transaction';
+import { TransactionState, TRANSACTION_CREATE, TRANSACTION_DELETE, TRANSACTION_UPDATE, transactionMutations } from '@/components/transaction/store';
 
 describe('transactions', () => {
   describe('TRANSACTION_CREATE', () => {
@@ -10,7 +8,7 @@ describe('transactions', () => {
       const state = createState();
       const newTransaction = defaultTransaction();
 
-      mutations[TRANSACTION_CREATE](state, newTransaction);
+      transactionMutations[TRANSACTION_CREATE](state, newTransaction);
 
       expect(state.transactions.length).toBe(1);
       expect(state.transactions[0]).toEqual(newTransaction);
@@ -21,7 +19,7 @@ describe('transactions', () => {
       const newTransaction = defaultTransaction();
       expect(newTransaction.id).toBeNull();
 
-      mutations[TRANSACTION_CREATE](state, newTransaction);
+      transactionMutations[TRANSACTION_CREATE](state, newTransaction);
 
       expect(newTransaction.id).not.toBeNull();
     });
@@ -38,7 +36,7 @@ describe('transactions', () => {
       const updatedItem = Object.assign({}, originalItem);
       updatedItem.id = 'someId';
       updatedItem.category = new Category('my category');
-      mutations[TRANSACTION_UPDATE](state, updatedItem);
+      transactionMutations[TRANSACTION_UPDATE](state, updatedItem);
 
       expect(state.transactions[0]).toEqual(defaultItem);
       expect(state.transactions[1]).toEqual(updatedItem);
@@ -50,7 +48,7 @@ describe('transactions', () => {
       state.transactions = [initialTransaction];
 
       const updatedTransaction = new Transaction('someId', '', '', new Date(), null, 2.5, true);
-      mutations[TRANSACTION_UPDATE](state, updatedTransaction);
+      transactionMutations[TRANSACTION_UPDATE](state, updatedTransaction);
 
       expect(state.transactions[0]).toEqual(initialTransaction);
       expect(state.transactions.length).toBe(1);
@@ -63,14 +61,14 @@ describe('transactions', () => {
       state.transactions = [defaultTransaction()];
 
       let transactionToDelete = state.transactions[1];
-      mutations[TRANSACTION_DELETE](state, transactionToDelete);
+      transactionMutations[TRANSACTION_DELETE](state, transactionToDelete);
 
       expect(state.transactions.indexOf(transactionToDelete)).toBe(-1);
     });
   });
 });
 
-function createState(): AppState {
+function createState(): TransactionState {
   return {
     transactions: [],
   };

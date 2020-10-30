@@ -1,6 +1,6 @@
 import { mount, Wrapper } from '@vue/test-utils';
-import TransactionDialog from '@/components/transaction/transaction-dialog.vue';
-import Transaction, { defaultTransaction } from '@/components/transaction/transaction';
+import TransactionDialog from '@/components/transaction/dialog/transaction-dialog.vue';
+import Transaction, { defaultTransaction } from '@/components/transaction/store/transaction';
 import Category from '@/components/category/store/category';
 import { baseVue } from '@/tests/setup';
 
