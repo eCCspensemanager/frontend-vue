@@ -1,26 +1,22 @@
 import { categoryMutations, CategoryState, CATEGORY_CREATE } from '.';
-import Category from './category';
 
 describe('categories', () => {
   describe('CATEGORY_CREATE', () => {
     it('adds the category to the state', () => {
       const state = createState();
-      const newCategory = new Category('Insurance');
 
-      categoryMutations[CATEGORY_CREATE](state, newCategory);
+      categoryMutations[CATEGORY_CREATE](state, 'Insurance');
 
       expect(state.categories.length).toBe(1);
-      expect(state.categories[0]).toEqual(newCategory);
+      expect(state.categories[0].name).toEqual('Insurance');
     });
 
     it('generates category ID', () => {
       const state = createState();
-      const newCategory = new Category('');
-      expect(newCategory.id).toBeNull();
 
-      categoryMutations[CATEGORY_CREATE](state, newCategory);
+      categoryMutations[CATEGORY_CREATE](state, '');
 
-      expect(newCategory.id).not.toBeNull();
+      expect(state.categories[0].id).not.toBeNull();
     });
   });
 });

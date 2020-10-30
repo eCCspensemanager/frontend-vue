@@ -13,7 +13,6 @@
 
 <script>
 import { CATEGORY_CREATE } from '@/components/category/store';
-import Category from '@/components/category/store/category';
 
 export default {
   name: 'CreateCategory',
@@ -30,8 +29,7 @@ export default {
 
   methods: {
     create() {
-      let newCategory = new Category(this.category);
-      this.$store.commit(CATEGORY_CREATE, newCategory);
+      this.$store.commit(CATEGORY_CREATE, this.category);
       this.category = '';
     },
   },

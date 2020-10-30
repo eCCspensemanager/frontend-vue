@@ -1,8 +1,10 @@
 import { mount } from '@vue/test-utils';
 
 import CreateCategory from '@/components/category/create/create-category.vue';
-import { baseVue } from '@/tests/setup';
+import { baseVue, baseVue2 } from '@/tests/setup';
 import Category from '@/components/category/store/category';
+import { CategoryState, CATEGORY_CREATE } from '../store';
+import store from '@/store';
 
 describe('create-category.vue', () => {
   it('disables the button if no text is entered', async () => {
@@ -33,18 +35,18 @@ describe('create-category.vue', () => {
   });
 
   it('creates category and clears textfield on button click', async () => {
-    const vue = baseVue();
-    const component = mount(CreateCategory, vue);
+    const { base, spies } = baseVue2();
+    const component = mount(CreateCategory, base);
     const textfield = component.find('[data-test="categoryText"]');
     const createBtn = component.find('button');
 
-    expect(vue.store.state.category.categories.length).toBe(0);
+    base.store.getters.categoryExists.mockImplementation(() => false);
 
     await textfield.setValue('Insurance');
     await createBtn.trigger('click');
 
-    expect(vue.store.state.category.categories.length).toBe(1);
-    expect(vue.store.state.category.categories[0].name).toBe('Insurance');
-    expect(component.vm.$data.category).toBe('');
+    expect(spies[CATEGORY_CREATE]).toHaveBeenCalled();
+    expect(spies[CATEGORY_CREATE].mock.calls[0][1]).toBe('Insurance');
+    expect(textfield.text()).toBe('');
   });
 });

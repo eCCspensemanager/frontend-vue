@@ -24,7 +24,8 @@ export const categoryGetters = {
 };
 
 export const categoryMutations = {
-  [CATEGORY_CREATE](state: CategoryState, category: Category) {
+  [CATEGORY_CREATE](state: CategoryState, name: string) {
+    let category = new Category(name);
     category.id = generateRandomNo();
     state.categories.push(category);
   },
