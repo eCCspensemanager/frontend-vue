@@ -1,24 +1,22 @@
-import Category from '@/components/category/category';
+import { categoryStore } from '@/components/category/store';
 import Transaction from '@/components/transaction/transaction';
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { getters } from './getters';
 import { mutations } from './mutations';
 
 Vue.use(Vuex);
 
 export interface AppState {
   transactions: Transaction[];
-  categories: Category[];
+  //categories: Category[];
 }
 
 export default new Vuex.Store({
+  modules: {
+    category: categoryStore,
+  },
   state: {
     transactions: [],
-    categories: [],
   },
   mutations: mutations,
-  getters: getters,
-  actions: {},
-  modules: {},
 });

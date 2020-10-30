@@ -1,7 +1,7 @@
 import Category from '@/components/category/category';
 import Transaction from '@/components/transaction/transaction';
 import { AppState } from '.';
-import { CATEGORY_CREATE, TRANSACTION_CREATE, TRANSACTION_DELETE, TRANSACTION_UPDATE } from './mutation-types';
+import { TRANSACTION_CREATE, TRANSACTION_DELETE, TRANSACTION_UPDATE } from './mutation-types';
 import { generateRandomNo } from './storage-util';
 
 export const mutations = {
@@ -18,11 +18,5 @@ export const mutations = {
   [TRANSACTION_DELETE](state: AppState, transaction: Transaction) {
     var index = state.transactions.indexOf(transaction);
     state.transactions.splice(index, 1);
-  },
-
-  // TODO: extract mutations and state into package specific
-  [CATEGORY_CREATE](state: AppState, category: Category) {
-    category.id = generateRandomNo();
-    state.categories.push(category);
   },
 };

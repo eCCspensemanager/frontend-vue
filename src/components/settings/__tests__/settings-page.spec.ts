@@ -1,17 +1,15 @@
-import Vuetify from 'vuetify';
-import { createLocalVue, mount } from "@vue/test-utils";
-import Vuex from 'vuex';
+import { mount } from '@vue/test-utils';
 import Category from '@/components/category/category';
 import SettingsPage from '@/components/settings/settings-page.vue';
+import { baseVue } from '@/tests/setup';
 
 describe('settings-page', () => {
-  const localVue = createLocalVue()
-  localVue.use(Vuex)
-
-  const vuetify = new Vuetify()
-  const store = new Vuex.Store({ state: { categories: [new Category("One"), new Category("Two")] } })
-
   it('should do something', () => {
-    const element = mount(SettingsPage, {localVue, vuetify, store})
-  })
-})
+    const element = mount(
+      SettingsPage,
+      baseVue({
+        categories: [new Category('One'), new Category('Two')],
+      }),
+    );
+  });
+});

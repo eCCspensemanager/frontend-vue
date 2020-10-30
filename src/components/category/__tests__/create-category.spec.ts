@@ -38,13 +38,13 @@ describe('create-category.vue', () => {
     const textfield = component.find('[data-test="categoryText"]');
     const createBtn = component.find('button');
 
-    expect(vue.store.state.categories.length).toBe(0);
+    expect(vue.store.state.category.categories.length).toBe(0);
 
     await textfield.setValue('Insurance');
     await createBtn.trigger('click');
 
-    expect(vue.store.state.categories.length).toBe(1);
-    expect(vue.store.state.categories[0].name).toBe('Insurance');
+    expect(vue.store.state.category.categories.length).toBe(1);
+    expect(vue.store.state.category.categories[0].name).toBe('Insurance');
     expect(component.vm.$data.category).toBe('');
   });
 });

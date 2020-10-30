@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { CATEGORY_CREATE } from '@/store/mutation-types';
+import { CATEGORY_CREATE } from '@/components/category/store/mutation-types';
 import Category from '@/components/category/category';
 
 export default {
@@ -24,7 +24,7 @@ export default {
 
   computed: {
     createDisabled() {
-      let categoryAlreadyExists = this.$store.state.categories
+      let categoryAlreadyExists = this.$store.state.category.categories
         .map((item) => {
           return item.name;
         })

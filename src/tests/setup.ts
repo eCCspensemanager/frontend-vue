@@ -5,6 +5,9 @@ import { createLocalVue } from '@vue/test-utils';
 import Category from '@/components/category/category';
 import Transaction from '@/components/transaction/transaction';
 import { mutations } from '@/store/mutations';
+import { categoryStore } from '@/components/category/store';
+import { categoryGetters } from '@/components/category/store/getters';
+import { categoryMutations } from '@/components/category/store/mutations';
 
 Vue.use(Vuetify);
 
@@ -19,9 +22,15 @@ export function baseVue(input?: BaseVueInput) {
   localVue.use(Vuex);
   const vuetify = new Vuetify();
   const store = new Vuex.Store({
+    modules: {
+      category: {
+        state: { categories: input?.categories ?? [] },
+        mutations: categoryMutations,
+        getters: categoryGetters,
+      },
+    },
     state: {
       transactions: input?.transactions ?? [],
-      categories: input?.categories ?? [],
     },
     mutations: mutations,
   });
