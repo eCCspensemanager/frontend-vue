@@ -1,5 +1,4 @@
-import { categoryMutations } from '@/components/category/store/mutations';
-import { CategoryState, CATEGORY_CREATE } from '.';
+import { categoryMutations, CategoryState, CATEGORY_CREATE } from '.';
 import Category from './category';
 
 describe('categories', () => {

@@ -7,7 +7,7 @@ import { TRANSACTION_CREATE } from '@/store/mutation-types';
 import Transaction from '@/components/transaction/transaction';
 import { generateRandomNo } from '@/store/storage-util';
 import Category from '@/components/category/store/category';
-import { CATEGORY_CREATE } from './components/category/store/mutation-types';
+import { CATEGORY_CREATE } from './components/category/store';
 
 Vue.config.productionTip = false;
 

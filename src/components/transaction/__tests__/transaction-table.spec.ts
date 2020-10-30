@@ -1,4 +1,4 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import TransactionTable from '@/components/transaction/transaction-table.vue';
 import Category from '@/components/category/store/category';
 import Transaction from '@/components/transaction/transaction';

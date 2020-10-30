@@ -15,7 +15,7 @@ const routes: RouteConfig[] = [
     path: SETTINGS_ROUTE,
     name: 'Settings',
     // Generates separate chunk (settings.[hash].js), which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "settings" */ '@/components/settings/settings-page.vue'),
+    component: () => import(/* webpackChunkName: "settings" */ '@/components/settings/page/settings-page.vue'),
   },
   {
     path: ABOUT_ROUTE,

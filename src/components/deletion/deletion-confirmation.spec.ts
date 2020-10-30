@@ -1,7 +1,7 @@
 import Vuetify from 'vuetify';
 import { mount, createLocalVue, Wrapper } from '@vue/test-utils';
 import DeletionConfirmation from '@/components/deletion/index.vue';
-import DeletionConfirmationData from '@/components/deletion/deletion-confirmation-data';
+import DeletionConfirmationData from '@/components/deletion/data/deletion-confirmation-data';
 
 describe('deletion-confirmation', () => {
   const localVue = createLocalVue();

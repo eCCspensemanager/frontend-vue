@@ -24,7 +24,7 @@
 import { defaultTransaction } from './transaction';
 import TransactionDialog from './transaction-dialog';
 import DeletionConfirmation from '@/components/deletion';
-import DeletionConfirmationData from '@/components/deletion/deletion-confirmation-data';
+import DeletionConfirmationData from '@/components/deletion/data/deletion-confirmation-data';
 import { TRANSACTION_DELETE } from '@/store/mutation-types';
 
 export default {

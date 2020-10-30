@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Category from '@/components/category/store/category';
-import SettingsPage from '@/components/settings/settings-page.vue';
+import SettingsPage from '@/components/settings/page/settings-page.vue';
 import { baseVue } from '@/tests/setup';
 
 describe('settings-page', () => {

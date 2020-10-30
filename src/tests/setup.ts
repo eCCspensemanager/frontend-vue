@@ -5,9 +5,7 @@ import { createLocalVue } from '@vue/test-utils';
 import Category from '@/components/category/store/category';
 import Transaction from '@/components/transaction/transaction';
 import { mutations } from '@/store/mutations';
-import { categoryStore } from '@/components/category/store';
-import { categoryGetters } from '@/components/category/store/getters';
-import { categoryMutations } from '@/components/category/store/mutations';
+import { categoryMutations, categoryGetters } from '@/components/category/store';
 
 Vue.use(Vuetify);
 

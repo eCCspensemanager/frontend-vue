@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { CATEGORY_CREATE } from '@/components/category/store/mutation-types';
+import { CATEGORY_CREATE } from '@/components/category/store';
 import Category from '@/components/category/store/category';
 
 export default {
