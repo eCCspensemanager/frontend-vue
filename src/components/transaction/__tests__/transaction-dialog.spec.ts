@@ -1,7 +1,7 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import TransactionDialog from '@/components/transaction/transaction-dialog.vue';
 import Transaction, { defaultTransaction } from '@/components/transaction/transaction';
-import Category from '@/components/category/category';
+import Category from '@/components/category/store/category';
 import { baseVue } from '@/tests/setup';
 
 describe('transaction-dialog.vue', () => {

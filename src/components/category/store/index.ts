@@ -1,4 +1,4 @@
-import Category from '../category';
+import Category from './category';
 import { categoryGetters } from './getters';
 import { categoryMutations } from './mutations';
 

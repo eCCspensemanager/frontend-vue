@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import TransactionTable from '@/components/transaction/transaction-table.vue';
-import Category from '@/components/category/category';
+import Category from '@/components/category/store/category';
 import Transaction from '@/components/transaction/transaction';
 import { baseVue } from '@/tests/setup';
 

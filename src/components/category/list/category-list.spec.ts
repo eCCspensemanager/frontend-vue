@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
-import Category from '@/components/category/category';
-import CategoryList from '@/components/category/category-list.vue';
+import Category from '@/components/category/store/category';
+import CategoryList from '@/components/category/list/category-list.vue';
 import { baseVue } from '@/tests/setup';
 
 describe('category-list.vue', () => {

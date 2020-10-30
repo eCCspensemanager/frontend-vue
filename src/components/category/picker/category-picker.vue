@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Category from './category';
+import Category from '@/components/category/store/category';
 export default {
   name: 'CategoryPicker',
 

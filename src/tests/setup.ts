@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import Vuex from 'vuex';
 import { createLocalVue } from '@vue/test-utils';
-import Category from '@/components/category/category';
+import Category from '@/components/category/store/category';
 import Transaction from '@/components/transaction/transaction';
 import { mutations } from '@/store/mutations';
 import { categoryStore } from '@/components/category/store';

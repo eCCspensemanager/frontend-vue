@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import Category from '@/components/category/category';
+import Category from '@/components/category/store/category';
 import SettingsPage from '@/components/settings/settings-page.vue';
 import { baseVue } from '@/tests/setup';
 

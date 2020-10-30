@@ -34,7 +34,7 @@
 <script>
 import { TRANSACTION_CREATE, TRANSACTION_UPDATE } from '../../store/mutation-types';
 import Transaction from './transaction';
-import CategoryPicker from '@/components/category/category-picker';
+import CategoryPicker from '@/components/category/picker/category-picker';
 
 export default {
   name: 'TransactionDialog',

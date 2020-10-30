@@ -13,7 +13,7 @@
 
 <script>
 import { CATEGORY_CREATE } from '@/components/category/store/mutation-types';
-import Category from '@/components/category/category';
+import Category from '@/components/category/store/category';
 
 export default {
   name: 'CreateCategory',

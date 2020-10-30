@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils';
 
-import CreateCategory from '@/components/category/create-category.vue';
+import CreateCategory from '@/components/category/create/create-category.vue';
 import { baseVue } from '@/tests/setup';
-import Category from '@/components/category/category';
+import Category from '@/components/category/store/category';
 
 describe('create-category.vue', () => {
   it('disables the button if no text is entered', async () => {

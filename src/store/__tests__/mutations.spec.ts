@@ -1,4 +1,4 @@
-import Category from '@/components/category/category';
+import Category from '@/components/category/store/category';
 import Transaction, { defaultTransaction } from '@/components/transaction/transaction';
 import { AppState } from '@/store';
 import { TRANSACTION_CREATE, TRANSACTION_DELETE, TRANSACTION_UPDATE } from '@/store/mutation-types';

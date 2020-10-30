@@ -1,6 +1,6 @@
 import { generateRandomNo } from '@/store/storage-util';
 import { CategoryState } from '.';
-import Category from '../category';
+import Category from './category';
 import { CATEGORY_CREATE } from './mutation-types';
 
 export const categoryMutations = {
