@@ -6,6 +6,7 @@ import Category from '@/components/category/store/category';
 import Transaction from '@/components/transaction/store/transaction';
 import { transactionGetters, transactionMutations } from '@/components/transaction/store';
 import { categoryMutations, categoryGetters, CATEGORY_CREATE, CategoryState } from '@/components/category/store';
+import { mockGetters, mockMutations } from './mock';
 
 Vue.use(Vuetify);
 
@@ -38,15 +39,7 @@ export function baseVue(input?: BaseVueInput) {
   return { localVue, vuetify, store, ...options };
 }
 
-const mockedCategoryGetters = {
-  getCategories: (_: CategoryState) => jest.fn(),
-  getCategoryByName: (_: CategoryState) => jest.fn(),
-  categoryExists: (_: CategoryState) => jest.fn(),
-};
-
-const mockedCategoryMutations = {
-  [CATEGORY_CREATE]: jest.fn(),
-};
+const mockedCategoryMutations = mockMutations(categoryMutations);
 
 export function baseVue2(input?: BaseVueInput) {
   const localVue = createLocalVue();
@@ -58,12 +51,12 @@ export function baseVue2(input?: BaseVueInput) {
       category: {
         state: { categories: input?.categories ?? [] },
         mutations: mockedCategoryMutations,
-        getters: mockedCategoryGetters,
+        getters: mockGetters(categoryGetters),
       },
       transaction: {
         state: { transactions: input?.transactions ?? [] },
         mutations: transactionMutations,
-        getters: transactionGetters,
+        getters: transactionGetters, // TODO use 'mockGetters'
       },
     },
   });
