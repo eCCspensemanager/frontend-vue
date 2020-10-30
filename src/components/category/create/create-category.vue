@@ -24,14 +24,7 @@ export default {
 
   computed: {
     createDisabled() {
-      let categoryAlreadyExists = this.$store.state.category.categories
-        .map((item) => {
-          return item.name;
-        })
-        .includes(this.category);
-      let emptyTextfield = this.category == '';
-
-      return emptyTextfield || categoryAlreadyExists;
+      return this.category == '' || this.$store.getters.categoryExists(this.category);
     },
   },
 

@@ -8,9 +8,18 @@ export interface CategoryState {
 }
 
 export const categoryGetters = {
-  // TODO add getter and use in CategoryList
-  getCategoryByName: (state: CategoryState) => (name: String) => {
+  getCategories: (state: CategoryState) => () => {
+    return state.categories;
+  },
+  getCategoryByName: (state: CategoryState) => (name: string) => {
     return state.categories.find((category) => category.name == name);
+  },
+  categoryExists: (state: CategoryState) => (name: string) => {
+    return state.categories
+      .map((item) => {
+        return item.name;
+      })
+      .includes(name);
   },
 };
 
