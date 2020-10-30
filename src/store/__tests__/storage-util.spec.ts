@@ -1,4 +1,4 @@
-import { generateRandomNo } from '../../../src/store/storage-util';
+import { generateRandomNo } from '@/store/storage-util';
 
 describe('storage-util.js', () => {
   it('generates random strings', () => {

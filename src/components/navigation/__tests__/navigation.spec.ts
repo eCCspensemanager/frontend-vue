@@ -1,5 +1,5 @@
 import { mount, createLocalVue, Wrapper } from '@vue/test-utils';
-import Navigation from '@/components/navigation.vue';
+import Navigation from '@/components/navigation/navigation.vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import { EXPENSES_ROUTE, SETTINGS_ROUTE, ABOUT_ROUTE } from '@/router/routes';

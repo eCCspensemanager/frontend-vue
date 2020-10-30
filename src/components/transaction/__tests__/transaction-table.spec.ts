@@ -1,10 +1,8 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import Vuetify from 'vuetify';
 import TransactionTable from '@/components/transaction/transaction-table.vue';
-import Vuex from 'vuex';
 import Category from '@/components/category/category';
 import Transaction from '@/components/transaction/transaction';
-import { baseVue } from '../../../setup';
+import { baseVue } from '@/tests/setup';
 
 describe('transaction-table.vue', () => {
   const vue = baseVue({
