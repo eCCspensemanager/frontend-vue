@@ -49,7 +49,7 @@ export default {
 
   computed: {
     transactions: function () {
-      return this.$store.state.transaction.transactions;
+      return this.$store.getters.getTransactions();
     },
   },
 

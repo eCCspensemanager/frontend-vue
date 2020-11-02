@@ -5,11 +5,10 @@ import { baseVue } from '@/tests/setup';
 
 describe('settings-page', () => {
   it('should do something', () => {
-    const element = mount(
-      SettingsPage,
-      baseVue({
-        categories: [new Category('One'), new Category('Two')],
-      }),
-    );
+    const { base } = baseVue({
+      categories: [new Category('One'), new Category('Two')],
+    });
+
+    mount(SettingsPage, base);
   });
 });

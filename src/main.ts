@@ -6,7 +6,6 @@ import router from '@/router';
 import { TRANSACTION_CREATE } from '@/components/transaction/store';
 import Transaction from '@/components/transaction/store/transaction';
 import { generateRandomNo } from '@/store/storage-util';
-import Category from '@/components/category/store/category';
 import { CATEGORY_CREATE } from './components/category/store';
 
 Vue.config.productionTip = false;
@@ -16,9 +15,8 @@ new Vue({
   store,
   router,
   created() {
-    this.$store.commit(CATEGORY_CREATE, new Category('Entertainment'));
-    this.$store.commit(CATEGORY_CREATE, new Category('Groceries'));
-
+    this.$store.commit(CATEGORY_CREATE, 'Entertainment');
+    this.$store.commit(CATEGORY_CREATE, 'Groceries');
     this.$store.commit(
       TRANSACTION_CREATE,
       new Transaction(generateRandomNo(), 'Rewe', 'Beer', new Date(), this.$store.getters.getCategoryByName('Groceries'), 12.99, true),

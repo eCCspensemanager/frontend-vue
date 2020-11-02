@@ -5,12 +5,9 @@ import { baseVue } from '@/tests/setup';
 
 describe('category-list.vue', () => {
   it('should render the names of all categories', () => {
-    const list = mount(
-      CategoryList,
-      baseVue({
-        categories: [new Category('One'), new Category('Two')],
-      }),
-    );
+    const { base } = baseVue();
+    base.store.getters.getCategories.mockImplementation(() => [new Category('One'), new Category('Two')]);
+    const list = mount(CategoryList, base);
 
     let listItems = list.findAll('.v-list-item__content');
     expect(listItems.length).toBe(2);

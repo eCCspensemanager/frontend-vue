@@ -5,13 +5,13 @@ import Transaction from '@/components/transaction/store/transaction';
 import { baseVue } from '@/tests/setup';
 
 describe('transaction-table.vue', () => {
-  const vue = baseVue({
-    transactions: [
-      new Transaction('id1', 'Rewe', 'Nachos', new Date(), new Category('Groceries'), 2.99, true),
-      new Transaction('id2', 'cc', 'Income', new Date(), new Category('Groceries'), 13.99, false),
-    ],
-  });
-  const table = mount(TransactionTable, vue);
+  const transactions = [
+    new Transaction('id1', 'Rewe', 'Nachos', new Date(), new Category('Groceries'), 2.99, true),
+    new Transaction('id2', 'cc', 'Income', new Date(), new Category('Groceries'), 13.99, false),
+  ];
+  const { base } = baseVue();
+  base.store.getters.getTransactions.mockImplementation(() => transactions);
+  const table = mount(TransactionTable, base);
 
   it('renders column headers correctly', () => {
     let columnHeaders = table.findAll('.v-data-table-header th');
@@ -58,6 +58,6 @@ describe('transaction-table.vue', () => {
 
     // Edit button opens dialog and passes item data
     expect(editDialog.text()).not.toBe('');
-    expect(editDialog.props('item').payee).toBe(vue.store.state.transaction.transactions[0].payee);
+    expect(editDialog.props('item').payee).toBe(transactions[0].payee);
   });
 });
