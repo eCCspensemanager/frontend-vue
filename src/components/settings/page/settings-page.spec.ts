@@ -1,15 +1,18 @@
 import { mount } from '@vue/test-utils';
-import Category from '@/components/category/store/category';
 import SettingsPage from '@/components/settings/page/settings-page.vue';
 import { baseVue } from '@/tests/setup';
+import CategoryList from '@/components/category/list/category-list.vue';
+import CreateCategory from '@/components/category/create/create-category.vue';
 
 describe('settings-page', () => {
-  it('should do something', () => {
-    const element = mount(
-      SettingsPage,
-      baseVue({
-        categories: [new Category('One'), new Category('Two')],
-      }),
-    );
+  it('contains the category section as first element', () => {
+    const { base } = baseVue();
+
+    const component = mount(SettingsPage, base);
+    const categorySection = component.findAll('[data-test="categorySection"]').at(0);
+
+    expect(categorySection.props('heading')).toEqual('Categories');
+    expect(categorySection.findAllComponents(CategoryList).length).toBe(1);
+    expect(categorySection.findAllComponents(CreateCategory).length).toBe(1);
   });
 });

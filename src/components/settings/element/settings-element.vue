@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ heading }}</p>
+    <p class="settings-element-heading">{{ heading }}</p>
     <v-card max-height="500px">
       <slot />
     </v-card>

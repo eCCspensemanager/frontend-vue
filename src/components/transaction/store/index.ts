@@ -10,7 +10,9 @@ export interface TransactionState {
 }
 
 export const transactionGetters = {
-  // TODO add getter and use in TransactionTable
+  getTransactions: (state: TransactionState) => () => {
+    return state.transactions;
+  },
 };
 
 export const transactionMutations = {

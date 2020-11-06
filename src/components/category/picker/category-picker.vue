@@ -1,5 +1,5 @@
 <template>
-  <v-autocomplete v-model="buffer" :items="items" @change="categorySelected($event)" />
+  <v-autocomplete v-model="buffer" :items="items" :label="'Category'" @change="categorySelected($event)" />
 </template>
 
 <script>
@@ -15,7 +15,7 @@ export default {
 
   computed: {
     items() {
-      let items = this.$store.state.category.categories.map((item) => {
+      let items = this.$store.getters.getCategories().map((item) => {
         return { text: item.name, value: item, disabled: false };
       });
 

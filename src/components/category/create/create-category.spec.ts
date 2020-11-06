@@ -1,12 +1,14 @@
 import { mount } from '@vue/test-utils';
-
 import CreateCategory from '@/components/category/create/create-category.vue';
 import { baseVue } from '@/tests/setup';
-import Category from '@/components/category/store/category';
+import { CATEGORY_CREATE } from '../store';
 
 describe('create-category.vue', () => {
   it('disables the button if no text is entered', async () => {
-    const component = mount(CreateCategory, baseVue());
+    const { base } = baseVue();
+    base.store.getters.categoryExists.mockImplementation((value: string) => value == 'Entertainment');
+
+    const component = mount(CreateCategory, base);
     const textfield = component.find('[data-test="categoryText"]');
     const createBtn = component.find('button');
 
@@ -19,12 +21,10 @@ describe('create-category.vue', () => {
   });
 
   it('disables the button if category already existing', async () => {
-    const component = mount(
-      CreateCategory,
-      baseVue({
-        categories: [new Category('Entertainment')],
-      }),
-    );
+    const { base } = baseVue();
+    base.store.getters.categoryExists.mockImplementation(() => true);
+
+    const component = mount(CreateCategory, base);
     const textfield = component.find('[data-test="categoryText"]');
     const createBtn = component.find('button');
 
@@ -33,18 +33,18 @@ describe('create-category.vue', () => {
   });
 
   it('creates category and clears textfield on button click', async () => {
-    const vue = baseVue();
-    const component = mount(CreateCategory, vue);
+    const { base, spies } = baseVue();
+    const component = mount(CreateCategory, base);
     const textfield = component.find('[data-test="categoryText"]');
     const createBtn = component.find('button');
 
-    expect(vue.store.state.category.categories.length).toBe(0);
+    base.store.getters.categoryExists.mockImplementation(() => false);
 
     await textfield.setValue('Insurance');
     await createBtn.trigger('click');
 
-    expect(vue.store.state.category.categories.length).toBe(1);
-    expect(vue.store.state.category.categories[0].name).toBe('Insurance');
-    expect(component.vm.$data.category).toBe('');
+    expect(spies.category[CATEGORY_CREATE]).toHaveBeenCalled();
+    expect(spies.category[CATEGORY_CREATE].mock.calls[0][1]).toBe('Insurance');
+    expect(textfield.text()).toBe('');
   });
 });

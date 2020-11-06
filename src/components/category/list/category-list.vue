@@ -15,7 +15,7 @@ export default {
 
   computed: {
     categories: function () {
-      return this.$store.state.category.categories;
+      return this.$store.getters.getCategories();
     },
   },
 };

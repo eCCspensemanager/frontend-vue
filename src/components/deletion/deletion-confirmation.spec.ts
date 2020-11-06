@@ -1,22 +1,21 @@
 import Vuetify from 'vuetify';
-import { mount, createLocalVue, Wrapper } from '@vue/test-utils';
+import { mount, Wrapper } from '@vue/test-utils';
 import DeletionConfirmation from '@/components/deletion/index.vue';
 import DeletionConfirmationData from '@/components/deletion/data/deletion-confirmation-data';
+import { baseVue } from '@/tests/setup';
 
 describe('deletion-confirmation', () => {
-  const localVue = createLocalVue();
-  const vuetify = new Vuetify();
-
   it('renders based on the "showConfirmation" property', async () => {
-    let confirmation: Wrapper<any> = mount(DeletionConfirmation, {
-      localVue,
-      vuetify,
+    const { base } = baseVue({
       propsData: { deletionData: new DeletionConfirmationData() },
     });
+
+    let confirmation: Wrapper<any> = mount(DeletionConfirmation, base);
     expect(confirmation.find('#deletion-confirmation').text()).toBe('');
 
-    let shouldShowProps = new DeletionConfirmationData(true);
-    await confirmation.setProps({ deletionData: shouldShowProps });
+    await confirmation.setProps({
+      deletionData: new DeletionConfirmationData(true),
+    });
     expect(confirmation.find('#deletion-confirmation').text()).not.toBe('');
   });
 });

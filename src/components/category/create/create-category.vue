@@ -13,7 +13,6 @@
 
 <script>
 import { CATEGORY_CREATE } from '@/components/category/store';
-import Category from '@/components/category/store/category';
 
 export default {
   name: 'CreateCategory',
@@ -24,21 +23,13 @@ export default {
 
   computed: {
     createDisabled() {
-      let categoryAlreadyExists = this.$store.state.category.categories
-        .map((item) => {
-          return item.name;
-        })
-        .includes(this.category);
-      let emptyTextfield = this.category == '';
-
-      return emptyTextfield || categoryAlreadyExists;
+      return this.category == '' || this.$store.getters.categoryExists(this.category);
     },
   },
 
   methods: {
     create() {
-      let newCategory = new Category(this.category);
-      this.$store.commit(CATEGORY_CREATE, newCategory);
+      this.$store.commit(CATEGORY_CREATE, this.category);
       this.category = '';
     },
   },

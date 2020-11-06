@@ -1,6 +1,6 @@
 <template>
   <div class="mb-6 mt-6">
-    <SettingsElement :heading="categoriesHeading">
+    <SettingsElement data-test="categorySection" :heading="categoriesHeading">
       <CategoryList />
       <CreateCategory />
     </SettingsElement>

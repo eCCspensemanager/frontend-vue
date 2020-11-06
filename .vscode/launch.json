@@ -1,29 +1,38 @@
 {
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Jest Tests",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": ["--inspect-brk", "${workspaceRoot}/node_modules/.bin/jest", "--runInBand"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "vuejs: chrome",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/src",
+      "breakOnLoad": true,
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      }
+    },
+    {
+      "type": "firefox",
+      "request": "launch",
+      "name": "vuejs: firefox",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/src",
+      "pathMappings": [
         {
-            "type": "chrome",
-            "request": "launch",
-            "name": "vuejs: chrome",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}/src",
-            "breakOnLoad": true,
-            "sourceMapPathOverrides": {
-                "webpack:///src/*": "${webRoot}/*"
-            }
-        },
-        {
-            "type": "firefox",
-            "request": "launch",
-            "name": "vuejs: firefox",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}/src",
-            "pathMappings": [
-                {
-                    "url": "webpack:///src/",
-                    "path": "${webRoot}/"
-                }
-            ]
+          "url": "webpack:///src/",
+          "path": "${webRoot}/"
         }
-    ]
+      ]
+    }
+  ]
 }
