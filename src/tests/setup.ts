@@ -10,16 +10,10 @@ import { mockGetters, mockMutations } from './mock';
 
 Vue.use(Vuetify);
 
-interface BaseVueInput {
-  transactions?: Transaction[];
-  categories?: Category[];
-  options?: any;
-}
-
 const mockedCategoryMutations = mockMutations(categoryMutations);
 const mockedTransactionMutations = mockMutations(transactionMutations);
 
-export function baseVue(input?: BaseVueInput) {
+export function baseVue(options?: {}) {
   const localVue = createLocalVue();
   localVue.use(Vuex);
   const vuetify = new Vuetify();
@@ -27,12 +21,12 @@ export function baseVue(input?: BaseVueInput) {
   const store = new Vuex.Store({
     modules: {
       category: {
-        state: { categories: input?.categories ?? [] },
+        state: [],
         mutations: mockedCategoryMutations,
         getters: mockGetters(categoryGetters),
       },
       transaction: {
-        state: { transactions: input?.transactions ?? [] },
+        state: [],
         getters: mockGetters(transactionGetters),
         mutations: mockedTransactionMutations,
       },
@@ -42,9 +36,8 @@ export function baseVue(input?: BaseVueInput) {
   store.getters.getTransactions.mockImplementation(() => []);
   store.getters.getCategories.mockImplementation(() => []);
 
-  const options = input?.options ?? {};
   return {
-    base: { localVue, vuetify, store, ...options },
+    base: { localVue, vuetify, store, ...(options ?? {}) },
     spies: {
       transaction: mockedTransactionMutations,
       category: mockedCategoryMutations,

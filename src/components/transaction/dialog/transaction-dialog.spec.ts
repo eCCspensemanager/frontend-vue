@@ -49,7 +49,7 @@ describe('transaction-dialog.vue', () => {
       propsData: { item: transaction },
     };
 
-    const { base } = baseVue({ options: options });
+    const { base } = baseVue(options);
     base.store.getters.getCategories.mockImplementation(() => [new Category('Entertainment')]);
     return mount(TransactionDialog, base);
   }

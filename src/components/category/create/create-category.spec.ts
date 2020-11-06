@@ -2,7 +2,6 @@ import { mount } from '@vue/test-utils';
 
 import CreateCategory from '@/components/category/create/create-category.vue';
 import { baseVue } from '@/tests/setup';
-import Category from '@/components/category/store/category';
 import { CATEGORY_CREATE } from '../store';
 
 describe('create-category.vue', () => {

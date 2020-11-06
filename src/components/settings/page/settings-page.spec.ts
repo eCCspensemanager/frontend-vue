@@ -5,9 +5,9 @@ import { baseVue } from '@/tests/setup';
 
 describe('settings-page', () => {
   it('should do something', () => {
-    const { base } = baseVue({
-      categories: [new Category('One'), new Category('Two')],
-    });
+    const { base } = baseVue();
+
+    //     [new Category('One'), new Category('Two')];
 
     mount(SettingsPage, base);
   });
