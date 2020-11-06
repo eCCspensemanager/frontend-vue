@@ -1,4 +1,4 @@
-import { mount, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 
 import CreateCategory from '@/components/category/create/create-category.vue';
 import { baseVue } from '@/tests/setup';
