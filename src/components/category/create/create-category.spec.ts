@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils';
-
 import CreateCategory from '@/components/category/create/create-category.vue';
 import { baseVue } from '@/tests/setup';
 import { CATEGORY_CREATE } from '../store';

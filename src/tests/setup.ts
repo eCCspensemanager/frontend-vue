@@ -2,8 +2,6 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import Vuex from 'vuex';
 import { createLocalVue } from '@vue/test-utils';
-import Category from '@/components/category/store/category';
-import Transaction from '@/components/transaction/store/transaction';
 import { transactionGetters, transactionMutations } from '@/components/transaction/store';
 import { categoryMutations, categoryGetters } from '@/components/category/store';
 import { mockGetters, mockMutations } from './mock';
