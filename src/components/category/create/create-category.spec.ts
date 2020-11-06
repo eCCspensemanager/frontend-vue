@@ -23,7 +23,7 @@ describe('create-category.vue', () => {
   });
 
   it('disables the button if category already existing', async () => {
-    const { base } = baseVue({ categories: [new Category('Entertainment')] });
+    const { base } = baseVue();
     base.store.getters.categoryExists.mockImplementation(() => true);
 
     const component = mount(CreateCategory, base);

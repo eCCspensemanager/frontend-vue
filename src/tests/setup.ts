@@ -39,7 +39,6 @@ export function baseVue(input?: BaseVueInput) {
     },
   });
 
-  // TODO Return empty lists by default?
   store.getters.getTransactions.mockImplementation(() => []);
   store.getters.getCategories.mockImplementation(() => []);
 
