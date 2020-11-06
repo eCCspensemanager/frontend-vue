@@ -3,7 +3,6 @@ import SettingsPage from '@/components/settings/page/settings-page.vue';
 import { baseVue } from '@/tests/setup';
 import CategoryList from '@/components/category/list/category-list.vue';
 import CreateCategory from '@/components/category/create/create-category.vue';
-import SettingsElement from '@/components/settings/element/settings-element.vue';
 
 describe('settings-page', () => {
   it('contains the category section as first element', () => {
