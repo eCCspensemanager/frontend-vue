@@ -3,7 +3,7 @@
     <v-list-item v-for="category in categories" :id="category.id" :key="category.id">
       <v-list-item-content>
         {{ category.name }}
-        <v-divider class="mt-4" />
+        <v-divider class="mt-4 categories-divider" />
       </v-list-item-content>
     </v-list-item>
   </v-list>
@@ -20,3 +20,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.categories-divider {
+  flex-basis: 100%;
+}
+</style>
