@@ -5,6 +5,10 @@ export default class Budget {
   category: Category;
   amount: number;
 
+  isValid(): Boolean {
+    return !!this.category && !!this.amount && this.amount != 0;
+  }
+
   constructor(category: Category, amount: number) {
     this.id = null;
     this.category = category;
