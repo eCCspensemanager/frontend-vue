@@ -15,7 +15,7 @@
 
 <script>
 import Vue from 'vue';
-import { EXPENSES_ROUTE, SETTINGS_ROUTE, ABOUT_ROUTE } from '@/router/routes';
+import { EXPENSES_ROUTE, BUDGETS_ROUTE, SETTINGS_ROUTE, ABOUT_ROUTE } from '@/router/routes';
 
 export default Vue.component('Navigation', {
   props: {
@@ -25,6 +25,7 @@ export default Vue.component('Navigation', {
     showDrawer: false,
     items: [
       { id: 'btn-expenses', title: 'Expenses', icon: 'mdi-cash', to: EXPENSES_ROUTE },
+      { id: 'btn-budgets', title: 'Budgets', icon: 'mdi-cash-multiple', to: BUDGETS_ROUTE },
       { id: 'btn-settings', title: 'Settings', icon: 'mdi-cog', to: SETTINGS_ROUTE },
       { id: 'btn-about', title: 'About', icon: 'mdi-help-box', to: ABOUT_ROUTE },
     ],
