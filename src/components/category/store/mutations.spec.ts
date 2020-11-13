@@ -1,6 +1,6 @@
 import { categoryMutations, CategoryState, CATEGORY_CREATE } from '.';
 
-describe('categories', () => {
+describe('categoryMutations', () => {
   describe('CATEGORY_CREATE', () => {
     it('adds the category to the state', () => {
       const state = createState();
@@ -22,7 +22,5 @@ describe('categories', () => {
 });
 
 function createState(): CategoryState {
-  return {
-    categories: [],
-  };
+  return { categories: [] };
 }

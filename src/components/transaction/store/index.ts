@@ -34,6 +34,6 @@ export const transactionMutations = {
 
 export const transactionStore = {
   state: { transactions: [] },
-  getters: transactionGetters,
   mutations: transactionMutations,
+  getters: transactionGetters,
 };
