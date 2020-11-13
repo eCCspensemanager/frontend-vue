@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Existing budgets:</h3>
-    <v-list dense height="300px" class="overflow-y-auto">
+    <v-list dense height="200px" class="overflow-y-auto">
       <v-list-item v-for="budget in budgets" :id="budget.id" :key="budget.id">
         <v-list-item-content>
           {{ budget.category.name }} - {{ budget.amount }}

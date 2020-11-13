@@ -44,7 +44,7 @@ export default {
   },
 
   data: () => ({
-    visible: true,
+    visible: false,
     rules: {
       required: (value) => !!value || 'Required.',
     },
